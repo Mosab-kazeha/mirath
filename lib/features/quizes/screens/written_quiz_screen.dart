@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mirath_merge/features/quizes/screens/quiz_screen.dart';
 import 'package:provider/provider.dart';
 import '/core/resourses/colors.dart';
 
@@ -34,6 +35,8 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
     final quizProvider =
         Provider.of<WrittenQuizProvider>(context, listen: false);
     final currentQuiz = quizProvider.currentQuiz;
+    int questionNumber = 1;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Container(
@@ -207,6 +210,7 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                   children: [
                     IconButton(
                       onPressed: () {
+                        --questionNumber;
                         quizProvider.previousQuestion();
                         quizProvider.reset();
                       },
@@ -217,8 +221,15 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                     ),
                     IconButton(
                       onPressed: () {
+                        ++questionNumber;
                         quizProvider.nextQuestion();
                         quizProvider.reset();
+                        if (quizProvider.quizzes.length == questionNumber) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const QuizScreen()));
+                        }
                       },
                       icon: Icon(
                         Icons.keyboard_double_arrow_right_outlined,

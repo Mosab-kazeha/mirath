@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mirath_merge/features/quizes/screens/login_screen.dart';
+import 'package:mirath_merge/features/quizes/screens/profile_screen.dart';
+import 'package:mirath_merge/features/quizes/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
 import '/features/quizes/providers/quiz_provider.dart';
 import '/features/quizes/providers/written_quiz_provider.dart';
 import '/features/quizes/screens/written_quiz_screen.dart';
 import 'features/quizes/screens/quiz_screen.dart';
+import 'features/quizes/screens/signup_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,10 +29,14 @@ class MyApp extends StatelessWidget {
         //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
         //   useMaterial3: true,
         // ),
-        home: const WrittenQuizScreen(),
+        home: const WelcomeScreen(),
         routes: {
-          QuizScreen.routeName: (ctx) => QuizScreen(),
-          WrittenQuizScreen.routeName: (ctx) => WrittenQuizScreen(),
+          ProfileScreen.routeName: (ctx) => const ProfileScreen(),
+          LoginScreen.routeName: (ctx) => LoginScreen(),
+          SignupScreen.routeName: (ctx) => SignupScreen(),
+          QuizScreen.routeName: (ctx) => const QuizScreen(),
+          WrittenQuizScreen.routeName: (ctx) => const WrittenQuizScreen(),
+          WelcomeScreen.routeName: (ctx) => const WelcomeScreen(),
         },
         debugShowCheckedModeBanner: false,
       ),
