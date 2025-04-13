@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mirath_merge/features/quizes/screens/login_screen.dart';
 import 'package:mirath_merge/features/quizes/screens/signup_screen.dart';
 import 'package:mirath_merge/features/quizes/widgets/my_button.dart';
 import 'package:mirath_merge/features/quizes/widgets/my_glass_container.dart';
@@ -66,7 +65,6 @@ class WelcomeScreen extends StatelessWidget {
                         height: size.height / 19,
                       ),
                       MyButton(
-                        title: "انضم إلينا",
                         onTap: () {
                           Navigator.push(
                             context,
@@ -80,17 +78,24 @@ class WelcomeScreen extends StatelessWidget {
                         textColor: darkerBrown,
                         buttonWidth: size.width / 1.5,
                         buttonHeight: size.height / 20,
+                        child: const Text(
+                          "انضم إلينا",
+                          style: TextStyle(
+                            color: darkerBrown,
+                            fontSize: 16,
+                            fontFamily: 'Almarai',
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: size.height / 40,
                       ),
                       MyButton(
-                        title: "سجل دخولك بحسابك",
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginScreen(),
+                              builder: (context) => SignupScreen(),
                             ),
                           );
                         },
@@ -99,6 +104,14 @@ class WelcomeScreen extends StatelessWidget {
                         textColor: light,
                         buttonWidth: size.width / 1.5,
                         buttonHeight: size.height / 20,
+                        child: const Text(
+                          "سجل دخولك بحسابك",
+                          style: TextStyle(
+                            color: light,
+                            fontSize: 16,
+                            fontFamily: 'Almarai',
+                          ),
+                        ),
                       ),
                     ],
                   ),

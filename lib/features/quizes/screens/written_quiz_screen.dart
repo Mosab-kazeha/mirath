@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mirath_merge/features/quizes/screens/quiz_screen.dart';
 import 'package:provider/provider.dart';
+import '../widgets/my_drawer.dart';
 import '/core/resourses/colors.dart';
 
 import '../widgets/my_title.dart';
-import '/features/quizes/widgets/my_app_bar.dart';
 import '../../../core/resourses/assets_manager.dart';
 import '../providers/written_quiz_provider.dart';
 
@@ -38,8 +39,17 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
     int questionNumber = 1;
 
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 80,
+        centerTitle: true,
+        backgroundColor: appBarBackgroundColor,
+        title: SvgPicture.asset(logoImage),
+      ),
+      endDrawer: showCustomDrawer(size: size, context: context),
       resizeToAvoidBottomInset: true,
       body: Container(
+        width: size.width,
+        height: size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(quizBackgroundImage),
@@ -54,10 +64,10 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const MyAppBar(),
-                MyTitle(title: "أطور مهاراتي"),
                 SizedBox(height: size.height * 0.04),
-                Text(
+                const MyTitle(title: "أطور مهاراتي"),
+                SizedBox(height: size.height * 0.04),
+                const Text(
                   "إبدأ الاختبار الآن",
                   textDirection: TextDirection.rtl,
                   style: TextStyle(
@@ -74,14 +84,14 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (ctx, i) {
                       return Padding(
-                        padding: EdgeInsets.only(right: 1),
+                        padding: const EdgeInsets.all(4),
                         child: CircleAvatar(
                           backgroundColor: darkBrown,
-                          radius: 10,
+                          radius: 15,
                           child: Center(
                             child: Text(
                               "${i + 1}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: light,
                                 fontFamily: 'Almarai',
                                 fontSize: 16,
@@ -99,7 +109,8 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                   alignment: Alignment.center,
                   width: size.width * 0.9,
                   height: size.height * 0.2,
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   decoration: BoxDecoration(
                     color: darkBrown,
                     borderRadius: BorderRadius.circular(20),
@@ -111,7 +122,7 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                         // ". ما هو أول أمر مطلوب من المسلم تجاه مرجعية الوحي؟",
                         textAlign: TextAlign.center,
                         textDirection: TextDirection.rtl,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: light,
                           height: 2,
                           fontFamily: 'Almarai',
@@ -130,8 +141,8 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                       alignment: Alignment.center,
                       width: size.width * 0.9,
                       height: size.height * 0.2,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
                       decoration: BoxDecoration(
                         color: darkBrown,
                         borderRadius: BorderRadius.circular(20),
@@ -145,7 +156,7 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                                   // "هو التسليم التام والرد إلى ورسوله، وذلك من خلال الرجوع إلى القران والسنة.",
                                   textAlign: TextAlign.center,
                                   textDirection: TextDirection.rtl,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: light,
                                     height: 2,
                                     fontFamily: 'Almarai',
@@ -187,7 +198,7 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
@@ -214,7 +225,7 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                         quizProvider.previousQuestion();
                         quizProvider.reset();
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.keyboard_double_arrow_left_outlined,
                         color: darkBrown,
                       ),
@@ -225,13 +236,15 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                         quizProvider.nextQuestion();
                         quizProvider.reset();
                         if (quizProvider.quizzes.length == questionNumber) {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const QuizScreen()));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const QuizScreen(),
+                            ),
+                          );
                         }
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.keyboard_double_arrow_right_outlined,
                         color: darkBrown,
                       ),

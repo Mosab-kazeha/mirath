@@ -103,7 +103,6 @@ class SignupScreen extends StatelessWidget {
                         height: size.height / 60,
                       ),
                       MyButton(
-                        title: "هيا بنا",
                         onTap: () {
                           Navigator.pushReplacement(
                             context,
@@ -116,6 +115,14 @@ class SignupScreen extends StatelessWidget {
                         buttonWidth: size.width / 1.4,
                         buttonHeight: size.height / 20,
                         textColor: darkerBrown,
+                        child: const Text(
+                          "هيا بنا",
+                          style: TextStyle(
+                            color: darkBrown,
+                            fontSize: 16,
+                            fontFamily: 'Almarai',
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: size.height / 12,
@@ -136,12 +143,19 @@ class SignupScreen extends StatelessWidget {
                         height: size.height / 20,
                       ),
                       MyButton(
-                        title: "سجل باستخدام غوغل",
                         onTap: () {},
                         buttonColor: Colors.transparent,
                         buttonWidth: size.width / 1.4,
                         buttonHeight: size.height / 20,
                         textColor: light,
+                        child: const Text(
+                          "سجل باستخدام غوغل",
+                          style: TextStyle(
+                            color: light,
+                            fontSize: 16,
+                            fontFamily: 'Almarai',
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: size.height / 20,

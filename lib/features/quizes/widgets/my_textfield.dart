@@ -50,7 +50,7 @@ class MyTextField extends StatelessWidget {
         textAlign: TextAlign.end,
         decoration: InputDecoration(
           focusColor: Colors.lightBlue,
-          prefix: prefixIcon,
+          prefixIcon: prefixIcon,
           label: Center(
             child: Text(
               title,

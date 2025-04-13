@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mirath_merge/BookChapters/BookChaptersScreen.dart';
+import 'package:mirath_merge/features/quizes/screens/explain_screen.dart';
 import 'package:mirath_merge/features/quizes/screens/login_screen.dart';
 import 'package:mirath_merge/features/quizes/screens/profile_screen.dart';
 import 'package:mirath_merge/features/quizes/screens/welcome_screen.dart';
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
           QuizScreen.routeName: (ctx) => const QuizScreen(),
           WrittenQuizScreen.routeName: (ctx) => const WrittenQuizScreen(),
           WelcomeScreen.routeName: (ctx) => const WelcomeScreen(),
+          ExplainScreen.routeName: (ctx) => const ExplainScreen(),
         },
         debugShowCheckedModeBanner: false,
       ),

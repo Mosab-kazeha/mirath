@@ -103,7 +103,6 @@ class LoginScreen extends StatelessWidget {
                         height: size.height / 40,
                       ),
                       MyButton(
-                        title: "تسجيل",
                         onTap: () {
                           Navigator.pushReplacement(
                             context,
@@ -117,6 +116,14 @@ class LoginScreen extends StatelessWidget {
                         textColor: darkerBrown,
                         buttonWidth: size.width / 2,
                         buttonHeight: size.height / 18,
+                        child: const Text(
+                          'تسجيل',
+                          style: TextStyle(
+                            color: darkBrown,
+                            fontSize: 16,
+                            fontFamily: 'Almarai',
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: size.height / 40,

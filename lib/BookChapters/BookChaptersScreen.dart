@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mirath_merge/BookChapters/pdf_viewer_screen.dart';
 
+import '../core/resourses/assets_manager.dart';
+import '../core/resourses/colors.dart';
+import '../features/quizes/widgets/my_drawer.dart';
 import 'colorss.dart';
 
 class BookChaptersScreen extends StatelessWidget {
@@ -100,10 +104,24 @@ class BookChaptersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        body: Stack(
+    final size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 80,
+        backgroundColor: light,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_rounded,
+            )),
+      ),
+      endDrawer: showCustomDrawer(size: size, context: context),
+      body: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Stack(
           children: [
             Positioned.fill(
               child: Image.asset(
@@ -120,26 +138,6 @@ class BookChaptersScreen extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30.0, bottom: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.menu,
-                              color: AppColors1.color1, size: 28),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.arrow_forward,
-                              color: AppColors1.color1, size: 28),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
                   Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 16),

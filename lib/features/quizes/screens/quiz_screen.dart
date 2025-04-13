@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-
-import '../widgets/my_app_bar.dart';
+import '../widgets/my_drawer.dart';
 import '../widgets/my_title.dart';
 import '/core/resourses/colors.dart';
 import '/core/resourses/assets_manager.dart';
-
 import '/features/quizes/providers/quiz_provider.dart';
 import '../widgets/progress_bar.dart';
 import '../widgets/option.dart';
@@ -29,12 +28,20 @@ class QuizScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final quiz = Provider.of<QuizProvider>(context);
     final size = MediaQuery.of(context).size;
-    TextStyle textstyle = TextStyle(
+    TextStyle textstyle = const TextStyle(
       color: darkBrown,
       fontSize: 20,
       fontFamily: 'Almarai-Regular',
     );
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 80,
+        centerTitle: true,
+        backgroundColor: appBarBackgroundColor,
+        title: SvgPicture.asset(logoImage),
+      ),
+      endDrawer:
+          showCustomDrawer(textstyle: textstyle, size: size, context: context),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -49,8 +56,7 @@ class QuizScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              const MyAppBar(),
-              MyTitle(title: "أختبر فهمي"),
+              const MyTitle(title: "أختبر فهمي"),
               SizedBox(height: size.height * 0.04),
               ProgressBar(
                 progress: quiz.progress / quiz.currentQuiz.questions.length,
@@ -61,7 +67,8 @@ class QuizScreen extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 height: 120,
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 decoration: BoxDecoration(
                   color: light,
                   borderRadius: BorderRadius.circular(20),
@@ -76,6 +83,7 @@ class QuizScreen extends StatelessWidget {
                   style: textstyle,
                 ),
               ),
+              SizedBox(height: size.height * 0.06),
               Expanded(
                 child: ListView.builder(
                   itemCount: quiz.currentQuestion.options.length,
@@ -84,13 +92,13 @@ class QuizScreen extends StatelessWidget {
                       text: quiz.currentQuestion.options[i].answer,
                       isCorrect: quiz.currentQuestion.options[i].isCorrect,
                       onTap: () {
-                        if (quiz.currentQuestion.options[i].isCorrect) {
-                          showCustomDialog(context, "أحسنت", "واصل التقدم");
-                          quiz.nextQuestion();
-                        } else {
-                          showCustomDialog(context, "غير صحيح", "حاول مرة اخرى",
-                              icon: Icons.close_outlined);
-                        }
+                        // if (quiz.currentQuestion.options[i].isCorrect) {
+                        // showCustomDialog(context, "أحسنت", "واصل التقدم");
+                        quiz.nextQuestion();
+                        // } else {
+                        //   showCustomDialog(context, "غير صحيح", "حاول مرة اخرى",
+                        //       icon: Icons.close_outlined);
+                        // }
                       }),
                 ),
               )
@@ -115,7 +123,7 @@ void showCustomDialog(BuildContext context, String title, String message,
         child: Container(
           width: MediaQuery.of(context).size.width * 0.5,
           height: MediaQuery.of(context).size.height * 0.24,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: darkBrown,
             borderRadius: BorderRadius.circular(20),
@@ -132,18 +140,18 @@ void showCustomDialog(BuildContext context, String title, String message,
                     Text(
                       title,
                       textDirection: TextDirection.rtl,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: light,
                         fontSize: 20,
                         fontFamily: "Almarai",
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       message,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: light,
                         fontSize: 20,
                         fontFamily: "Almarai",

@@ -8,3 +8,4 @@ String personImage = "assets/images/person.png";
 String profileBackgrounImage = "assets/images/profile_background.jpg";
 String splashBackgrounImage = "assets/images/splash_screen_background.pnf";
 String splashImage = "assets/images/splash_screen.png";
+String cardImage = "assets/images/card.png";
