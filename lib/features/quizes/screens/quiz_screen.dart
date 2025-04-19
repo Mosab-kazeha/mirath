@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mirath_merge/features/quizes/screens/result_screen.dart';
 import 'package:provider/provider.dart';
 import '../widgets/my_drawer.dart';
 import '../widgets/my_title.dart';
@@ -9,10 +10,13 @@ import '/features/quizes/providers/quiz_provider.dart';
 import '../widgets/progress_bar.dart';
 import '../widgets/option.dart';
 
+// ignore: must_be_immutable
 class QuizScreen extends StatelessWidget {
   static const routeName = '/quiz-screen';
-  const QuizScreen({super.key});
+  QuizScreen({super.key});
 
+  int answeredQuestion = 1;
+  int correctAnswer = 0;
   String arabicLetter(int index) {
     int base = 0x0627;
     int code = base + index;
@@ -99,6 +103,22 @@ class QuizScreen extends StatelessWidget {
                         //   showCustomDialog(context, "غير صحيح", "حاول مرة اخرى",
                         //       icon: Icons.close_outlined);
                         // }
+                        ++answeredQuestion;
+                        if (quiz.currentQuestion.options[i].isCorrect) {
+                          ++correctAnswer;
+                        }
+                        if (quiz.currentQuiz.questions.length ==
+                            answeredQuestion) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultScreen(
+                                levelOfProgress:
+                                    correctAnswer * 100 / answeredQuestion,
+                              ),
+                            ),
+                          );
+                        }
                       }),
                 ),
               )

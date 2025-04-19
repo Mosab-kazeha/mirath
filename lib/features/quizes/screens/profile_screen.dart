@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mirath_merge/features/quizes/widgets/my_container.dart';
+import 'package:shared_preferences/shared_preferences.dart'
+    show SharedPreferences;
+import '../../../core/config/Sharedpref.dart';
 import '/core/resourses/colors.dart';
 import '../../../core/resourses/assets_manager.dart';
+import 'result_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile-screen';
@@ -41,9 +45,9 @@ class ProfileScreen extends StatelessWidget {
                   size: 60,
                 ),
               ),
-              const Text(
-                "يزن محمد فضة",
-                style: TextStyle(
+              Text(
+                getIt.get<SharedPreferences>().getString("name")!,
+                style: const TextStyle(
                   color: light,
                   fontWeight: FontWeight.bold,
                   fontSize: 40,
@@ -86,15 +90,27 @@ class ProfileScreen extends StatelessWidget {
                             isSquare: true,
                             title: "تقييماتي",
                           ),
-                          MyContainer(
-                            icon: const Icon(
-                              Icons.data_saver_off_outlined,
-                              color: oflight,
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ResultScreen(
+                                    levelOfProgress: 70,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: MyContainer(
+                              icon: const Icon(
+                                Icons.data_saver_off_outlined,
+                                color: oflight,
+                              ),
+                              width: size.width / 2.5,
+                              height: size.height / 6,
+                              isSquare: true,
+                              title: "مستوى التقدم",
                             ),
-                            width: size.width / 2.5,
-                            height: size.height / 6,
-                            isSquare: true,
-                            title: "مستوى التقدم",
                           ),
                         ],
                       ),

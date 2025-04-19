@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mirath_merge/BookChapters/BookChaptersScreen.dart';
-import 'package:mirath_merge/features/quizes/screens/welcome_screen.dart';
+import 'package:mirath_merge/core/config/Sharedpref.dart';
+import 'package:mirath_merge/features/quizes/screens/SignUi.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/resourses/assets_manager.dart';
 import '../../../core/resourses/colors.dart';
 import '../screens/profile_screen.dart';
@@ -10,7 +12,7 @@ import '../screens/setting_button.dart';
 Widget showCustomDrawer(
     {TextStyle? textstyle, required Size size, required BuildContext context}) {
   return Drawer(
-    width: size.width / 2,
+    width: size.width / 1.5,
     backgroundColor: darkerBrown,
     child: Column(
       children: [
@@ -46,7 +48,7 @@ Widget showCustomDrawer(
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const BookChaptersScreen(),
+                builder: (context) => BookChaptersScreen(),
               ),
             );
           },
@@ -108,11 +110,15 @@ Widget showCustomDrawer(
         SettingButton(
           title: "تسجيل خروج",
           defaultColor: light,
-          onTap: () {
+          onTap: () async {
+            await getIt.get<SharedPreferences>().remove("name");
+
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const WelcomeScreen(),
+                builder: (context) {
+                  return const SignUi();
+                },
               ),
             );
           },

@@ -22,12 +22,12 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<WrittenQuizProvider>(context, listen: false)
-        .randomizeCurrentQuizQuestions();
-    // Future.delayed(Duration.zero).then((_) {
-    //  Provider.of<WrittenQuizProvider>(context, listen: false)
+    // Provider.of<WrittenQuizProvider>(context, listen: false)
     //     .randomizeCurrentQuizQuestions();
-    // });
+    Future.delayed(Duration.zero).then((_) {
+      Provider.of<WrittenQuizProvider>(context, listen: false)
+          .randomizeCurrentQuizQuestions();
+    });
   }
 
   @override
@@ -36,6 +36,7 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
     final quizProvider =
         Provider.of<WrittenQuizProvider>(context, listen: false);
     final currentQuiz = quizProvider.currentQuiz;
+    int numberOfQuestion = currentQuiz.questions.length;
     int questionNumber = 1;
 
     return Scaffold(
@@ -101,7 +102,7 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                         ),
                       );
                     },
-                    itemCount: currentQuiz.questions.length,
+                    itemCount: (numberOfQuestion / 2).toInt(),
                   ),
                 ),
                 SizedBox(height: size.height * 0.02),
@@ -202,7 +203,7 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        "قيّم إجابتك",
+                        "قيّم إجابتك ",
                         style: TextStyle(
                           color: darkBrown,
                           fontSize: 16,
@@ -235,11 +236,12 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
                         ++questionNumber;
                         quizProvider.nextQuestion();
                         quizProvider.reset();
-                        if (quizProvider.quizzes.length == questionNumber) {
+                        print(currentQuiz.questions.length);
+                        if (numberOfQuestion / 2 == questionNumber) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const QuizScreen(),
+                              builder: (context) => QuizScreen(),
                             ),
                           );
                         }

@@ -11,3 +11,4 @@ const Color blue = Color(0xff8DA5F4);
 const Color creamyBrown = Color(0xffE4DCA3);
 const Color oflight = Color(0XffFFFEFE);
 const Color appBarBackgroundColor = Color(0XffE7DBC7);
+const Color lightbrown = Color(0xffA7711B);
