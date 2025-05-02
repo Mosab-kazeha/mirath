@@ -1,24 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mirath_merge/BookChapters/BookChaptersScreen.dart';
+import 'package:mirath_merge/features/quizes/models/hive_answer_model.dart';
+import 'package:mirath_merge/features/quizes/models/hive_mirath_model.dart';
+import 'package:mirath_merge/features/quizes/models/hive_question_model.dart';
+import 'package:mirath_merge/features/quizes/models/hive_quiz_model.dart';
 import 'package:mirath_merge/features/quizes/screens/SignUi.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'core/config/Sharedpref.dart';
+import 'core/resourses/book_chapter.dart';
+import 'core/resourses/mc_quiz_data.dart';
+import 'features/quizes/models/hive_chapter_model.dart';
 import 'features/quizes/providers/quiz_provider.dart';
 import 'features/quizes/providers/written_quiz_provider.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
+
+Box<MirathModelWithHive>? box;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterLocalization.instance.ensureInitialized();
-  //pref.clear();
-  await setup();
-  String? name = await getIt.get<SharedPreferences>().getString("name");
+  //! خزن ازا مو عباية خزن لوكلي
 
-  runApp(MyApp(
-    islogged: name != null && name.isNotEmpty,
-  ));
+  final appDocumentDir = await getApplicationDocumentsDirectory();
+  await Hive.initFlutter(appDocumentDir.path);
+
+  // Register adapters here
+  Hive.registerAdapter(MirathModelWithHiveAdapter());
+  Hive.registerAdapter(ChapterModelWithHiveAdapter());
+  Hive.registerAdapter(QuizModelWithHiveAdapter());
+  Hive.registerAdapter(QuestionModelWithHiveAdapter());
+  Hive.registerAdapter(AnswerModelWithHiveAdapter());
+
+  box = await Hive.openBox<MirathModelWithHive>('mirath');
+
+  if (box!.isEmpty) {
+    box!.add(
+      MirathModelWithHive(
+        chapter: bookChapter,
+        quiz: quizesData,
+        levelOfProgress: 0,
+        userName: null,
+        numberOfCompletedChapter: 0,
+      ),
+    );
+  }
+
+  runApp(
+    MyApp(islogged: box!.getAt(0)!.userName != null
+        // && box!.getAt(0)!.userName.isNotEmpty,
+        ),
+  );
 }
 
 final FlutterLocalization localization = FlutterLocalization.instance;
@@ -39,8 +72,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final updater = ShorebirdUpdater();
+
   @override
   void initState() {
+    updater.readCurrentPatch().then((currentPatch) {
+      print('The current patch number is: ${currentPatch?.number}');
+    });
+
+    _checkForUpdates;
+
     localization.init(
       mapLocales: [
         const MapLocale('en', AppLocale.en),
@@ -50,6 +91,20 @@ class _MyAppState extends State<MyApp> {
     );
     localization.onTranslatedLanguage = _onTranslatedLanguage;
     super.initState();
+  }
+
+  Future<void> _checkForUpdates() async {
+    // Check whether a new update is available.
+    final status = await updater.checkForUpdate();
+
+    if (status == UpdateStatus.outdated) {
+      try {
+        // Perform the update
+        await updater.update();
+      } on UpdateException catch (error) {
+        // Handle any errors that occur while updating.
+      }
+    }
   }
 
 // the setState function here is a must to add
@@ -72,9 +127,6 @@ class _MyAppState extends State<MyApp> {
         supportedLocales: localization.supportedLocales,
         localizationsDelegates: localization.localizationsDelegates,
         home: widget.islogged ? const BookChaptersScreen() : const SignUi(),
-        // home: ReadOrWatchChapterScreen(
-        //   bookChapterModel: bookChapter[0],
-        // ),
       ),
     );
   }

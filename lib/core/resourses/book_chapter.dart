@@ -1,159 +1,292 @@
-import 'package:mirath_merge/features/quizes/models/book_chapter_model.dart';
+import 'package:mirath_merge/features/quizes/models/hive_chapter_model.dart';
 
-List<BookChapterModel> bookChapter = [
-  BookChapterModel(
+List<ChapterModelWithHive> bookChapter = [
+  ChapterModelWithHive(
+    chapterIndex: 1,
     title: "باب في مرجعية الوحي",
     pdf: "assets/pdf/ch1.pdf",
     isChapterOpen: true,
+    videoUrl: "https://youtu.be/J33HQ_cKCGg?si=09bI7nkO3UeMkaom",
+    voice: "voice/voice1.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 2,
     title: "باب في تلقي القرآن على منهاج النبوة",
     pdf: "assets/pdf/ch2.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/bzXml1w91PM?si=ODiXZ5EF3bBBN05_",
+    voice: "voice/voice2.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 3,
     title: "باب تعظيم حدود الله",
     pdf: "assets/pdf/ch3.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/wL3hGYC-KwQ?si=7jih7ydjSZZ4I3wX",
+    voice: "voice/voice3.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 4,
     title: " باب ضبط الأفهام على معايير الوحي",
     pdf: "assets/pdf/ch4.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/00t-5zOu718?si=4v4BqM8py3-NKDWi",
+    voice: "voice/voice4.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 5,
     title: " باب في أن الدين على مراتب متفاوتة",
     pdf: "assets/pdf/ch5.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/yuPOm6FNofg?si=x_TM9LyoYzjvjOuR",
+    voice: "voice/voice5.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 6,
     title: " باب في مركزية التزكية في حياة المؤمن",
     pdf: "assets/pdf/ch6.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/9O73OIoIeGo?si=CY6PO2BDMQg4ICbD",
+    voice: "voice/voice6.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 7,
     title: " باب شرف العلم النافع",
     pdf: "assets/pdf/ch7.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/hqcxatX64lU?si=3oqaNSKZ8wkFUIwZ",
+    voice: "voice/voice7.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 8,
     title: " باب في مركزية العمل وأنه المقصود من العلم",
     pdf: "assets/pdf/ch8.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/LlwcVBgEX4s?si=f6IAENPzgX0Km3cY",
+    voice: "voice/voice8.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 9,
     title: " باب في صدق النية",
     pdf: "assets/pdf/ch9.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/OufFoZ9GW8w?si=wKw7IBYEmNMBzHsB",
+    voice: "voice/voice9.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 10,
     title: " باب أهمية استحضار الغاية",
-    pdf: "assets/pdf/ch10.pdf",
+    pdf: "passets/df/ch10.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/9Orfd_ipLo0?si=Kp3BFOBqKisJ7uEX",
+    voice: "voice/voice10.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 11,
     title: " باب تحمل الفرد مسؤولية النكليف تجاه نفسه وغيره",
-    pdf: "assets/pdf/ch11.pdf",
+    pdf: "passets/df/ch11.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/2TbI2NhTAd0?si=pt8twPHYZz23h9nj",
+    voice: "voice/voice11.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 12,
     title: " باب في المسؤولية العامة تجاه الإسلام والمسلمين",
-    pdf: "assets/pdf/ch12.pdf",
+    pdf: "passets/df/ch12.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/EUVNpqARKCY?si=kcOINXoKviVnKGIr",
+    voice: "voice/voice12.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 13,
     title: " باب في مركزية اتباع هدي الأنبياء",
-    pdf: "assets/pdf/ch13.pdf",
+    pdf: "passets/df/ch13.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/m6ZCSN9hjw0?si=UWFtTPGBZzEjPwUu",
+    voice: "voice/voice13.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 14,
     title: " باب فضل الإصلاح والدعوة إلى الله تعالى",
-    pdf: "assets/pdf/ch14.pdf",
+    pdf: "passets/df/ch14.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/hLRNOURdvHQ?si=wnVyypYyiqZAHoD1",
+    voice: "voice/voice14.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 15,
     title: " باب في صفات المصلحين",
-    pdf: "assets/pdf/ch15.pdf",
+    pdf: "passets/df/ch15.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/LIv3jGC2dSo?si=efzQO6xfkX2pai8c",
+    voice: "voice/voice15.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 16,
     title: " باب في أهمية الوعي بسبيل المجرمين",
-    pdf: "assets/pdf/ch16.pdf",
+    pdf: "passets/df/ch16.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/aZ3h7rx3v48?si=LzNVscq489mLupm3",
+    voice: "voice/voice16.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 17,
     title: " باب العناية بالشباب",
-    pdf: "assets/pdf/ch17.pdf",
+    pdf: "passets/df/ch17.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/q15xVxnWk9U?si=DQSgRLi-LIQML2qR",
+    voice: "voice/voice17.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 18,
     title: " باب دور المرأة في بث العلم ونصرة الإسلام",
-    pdf: "assets/pdf/ch18.pdf",
+    pdf: "passets/df/ch18.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/sQ47L7sBFt4?si=wqATsAl27rfy43pu",
+    voice: "voice/voice18.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 19,
     title: " باب في الثبات على الاستقامة والحذر من الانتكاس",
-    pdf: "assets/pdf/ch19.pdf",
+    pdf: "passets/df/ch19.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/4Khn_-ip4tY?si=UBiB3xkBeeQJZ57Y",
+    voice: "voice/voice19.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 20,
     title: " باب الحث على الاعتدال في الدين والتيسير فيه",
-    pdf: "assets/pdf/ch20.pdf",
+    pdf: "passets/df/ch20.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/W_CbgOileZI?si=74Ah77Eb3zrp7nMo",
+    voice: "voice/voice20.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 21,
     title: " باب في مركزية حسن الخلق والبر والإحسان",
-    pdf: "assets/pdf/ch21.pdf",
+    pdf: "passets/df/ch21.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/A8jGgA1dSUg?si=LgmmDVEpP-L1uOZx",
+    voice: "voice/voice21.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 22,
     title: " باب في مفاتيح الهداية والبصيرة",
-    pdf: "assets/pdf/ch22.pdf",
+    pdf: "passets/df/ch22.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/UlPIIFBQzJc?si=il0xG-xbNyhmOTF7",
+    voice: "voice/voice22.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 23,
     title: " باب في أهمية الصحبة الصالحة ",
-    pdf: "assets/pdf/ch23.pdf",
+    pdf: "passets/df/ch23.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/6LK4A1IOmFE?si=Tc6YJ8PURrfdYxi9",
+    voice: "voice/voice23.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 24,
     title: " باب في الحذر من الفتن",
-    pdf: "assets/pdf/ch24.pdf",
+    pdf: "passets/df/ch24.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/DnjMfeARpXQ?si=yKzgSQUW9EOfzmDh",
+    voice: "voice/voice24.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 25,
     title: " باب في فهم أسباب ضعف المسلمين ",
-    pdf: "assets/pdf/ch25.pdf",
+    pdf: "passets/df/ch25.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/G1DOGo4Rie0?si=eC32Aj-EkIHTcZcp",
+    voice: "voice/voice25.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 26,
     title: " باب في السنن الإلهية ",
-    pdf: "assets/pdf/ch26.pdf",
+    pdf: "passets/df/ch26.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/YduAIggiUGY?si=eCgeZp-e6QK0uKmu",
+    voice: "voice/voice26.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 27,
     title: " باب في حسن العاقبة والتمكين بعد البلاء ",
-    pdf: "assets/pdf/ch27.pdf",
+    pdf: "passets/df/ch27.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/MeCpl7O9bj0?si=vK9acnDlRMhRR1tG",
+    voice: "voice/voice27.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 28,
+    title: " باب في المبشرات بالتمكين وصلاح أحوال المسلمين",
+    pdf: "passets/df/ch28.pdf",
+    isChapterOpen: false,
+    videoUrl: "https://youtu.be/6Bf_JJd3LNY?si=qdtl37gpnMyIhr6p",
+    voice: "voice/voice28.ogg",
+    chapterSimmary: null,
+  ),
+  ChapterModelWithHive(
+    chapterIndex: 29,
     title: " باب في أن الإسلام هو الدين الوحيد المقبول عند الله ",
-    pdf: "assets/pdf/ch29.pdf",
+    pdf: "passets/df/ch29.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/luc_NCdRtMw?si=al521CNnnF00tc_Z",
+    voice: "voice/voice29.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 30,
     title: " باب سير المؤمن إلى الله تعالى بين الخوف والرجاء ",
-    pdf: "assets/pdf/ch30.pdf",
+    pdf: "passets/df/ch30.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/tzXsTqXNOq8?si=wDu178ojGC5xfZGc",
+    voice: "voice/voice30.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 31,
     title: " باب في الشوق إلى رسول الله ﷺ والحنين إليه  ",
-    pdf: "assets/pdf/ch31.pdf",
+    pdf: "passets/df/ch31.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/-chYKXp9oNI?si=u1ub5PsL6bi5ztfp",
+    voice: "voice/voice31.ogg",
+    chapterSimmary: null,
   ),
-  BookChapterModel(
+  ChapterModelWithHive(
+    chapterIndex: 32,
     title: " باب الشوق إلى الله سبحانه وتعالى  ",
-    pdf: "assets/pdf/ch32.pdf",
+    pdf: "passets/df/ch32.pdf",
     isChapterOpen: false,
+    videoUrl: "https://youtu.be/-chYKXp9oNI?si=u1ub5PsL6bi5ztfp",
+    voice: "voice/voice31.ogg",
+    chapterSimmary: null,
   ),
 ];

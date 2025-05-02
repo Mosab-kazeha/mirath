@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mirath_merge/BookChapters/BookChaptersScreen.dart';
+import 'package:mirath_merge/features/quizes/screens/rating_screen.dart';
 import 'package:mirath_merge/features/quizes/widgets/my_container.dart';
-import 'package:shared_preferences/shared_preferences.dart'
-    show SharedPreferences;
-import '../../../core/config/Sharedpref.dart';
+import 'package:mirath_merge/main.dart';
 import '/core/resourses/colors.dart';
 import '../../../core/resourses/assets_manager.dart';
 import 'result_screen.dart';
@@ -32,6 +32,7 @@ class ProfileScreen extends StatelessWidget {
           height: size.height,
           color: const Color.fromARGB(171, 49, 32, 18),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               SizedBox(
                 height: size.height / 8,
@@ -46,7 +47,8 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                getIt.get<SharedPreferences>().getString("name")!,
+                // getIt.get<SharedPreferences>().getString("name")!,
+                box!.getAt(0)!.userName!,
                 style: const TextStyle(
                   color: light,
                   fontWeight: FontWeight.bold,
@@ -54,56 +56,66 @@ class ProfileScreen extends StatelessWidget {
                   fontFamily: 'Almarai',
                 ),
               ),
-              const Text(
-                "طالب جامعي في الهندسة المعلوماتية جامعة دمشق",
-                style: TextStyle(
-                  color: light,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  fontFamily: 'Almarai',
-                ),
-              ),
+              // const Text(
+              //   "طالب جامعي في الهندسة المعلوماتية جامعة دمشق",
+              //   textAlign: TextAlign.center,
+              //   style: TextStyle(
+              //     color: light,
+              //     fontWeight: FontWeight.bold,
+              //     fontSize: 18,
+              //     fontFamily: 'Almarai',
+              //   ),
+              // ),
               SizedBox(
                 height: size.height / 8,
               ),
               Container(
                 width: size.width,
-                height: size.height / 2,
+                height: size.height / 2.2,
                 decoration: const BoxDecoration(
                   color: lightBrown,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 40),
+                      padding: const EdgeInsets.only(bottom: 40),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          MyContainer(
-                            icon: const Icon(
-                              Icons.file_copy,
-                              color: oflight,
-                            ),
-                            width: size.width / 2.5,
-                            height: size.height / 6,
-                            isSquare: true,
-                            title: "تقييماتي",
-                          ),
                           InkWell(
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ResultScreen(
-                                    levelOfProgress: 70,
-                                  ),
+                                  builder: (context) => const RatingScreen(),
                                 ),
                               );
                             },
                             child: MyContainer(
-                              icon: const Icon(
+                              widget: const Icon(
                                 Icons.data_saver_off_outlined,
+                                color: oflight,
+                              ),
+                              width: size.width / 2.5,
+                              height: size.height / 6,
+                              isSquare: true,
+                              title: "تقييماتي",
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ResultScreen(),
+                                ),
+                              );
+                            },
+                            child: MyContainer(
+                              widget: const Icon(
+                                Icons.data_exploration_outlined,
                                 color: oflight,
                               ),
                               width: size.width / 2.5,
@@ -115,27 +127,37 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    MyContainer(
-                      icon: const Icon(
-                        Icons.edit_square,
-                        color: oflight,
-                      ),
-                      width: size.width / 1.5,
-                      height: size.height / 14,
-                      isSquare: false,
-                      title: "تعديل الملف الشخصي",
-                    ),
-                    SizedBox(
-                      height: size.height / 32,
-                    ),
-                    MyContainer(
-                      width: size.width / 1.5,
-                      height: size.height / 14,
-                      isSquare: false,
-                      title: "مشاركة الملف الشخصي",
-                      icon: const Icon(
-                        Icons.share,
-                        color: oflight,
+                    // MyContainer(
+                    //   widget: const Icon(
+                    //     Icons.edit_square,
+                    //     color: oflight,
+                    //   ),
+                    //   width: size.width / 1.5,
+                    //   height: size.height / 14,
+                    //   isSquare: false,
+                    //   title: "تعديل إسم المستخدم",
+                    // ),
+                    // SizedBox(
+                    //   height: size.height / 32,
+                    // ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BookChaptersScreen(),
+                          ),
+                        );
+                      },
+                      child: MyContainer(
+                        width: size.width / 1.5,
+                        height: size.height / 14,
+                        isSquare: false,
+                        title: "العودة الى الأبواب",
+                        widget: const Icon(
+                          Icons.book,
+                          color: oflight,
+                        ),
                       ),
                     ),
                   ],

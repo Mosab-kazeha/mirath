@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mirath_merge/features/quizes/models/hive_chapter_model.dart';
 import 'package:mirath_merge/features/quizes/screens/read_watch_chapter_screen.dart';
-
-import '../core/resourses/book_chapter.dart';
+import 'package:mirath_merge/main.dart';
 import '../core/resourses/colors.dart';
 import '../features/quizes/widgets/my_drawer.dart';
 import 'colorss.dart';
@@ -99,6 +99,35 @@ class BookChaptersScreen extends StatelessWidget {
         appBar: AppBar(
           toolbarHeight: 80,
           backgroundColor: light,
+          title: Container(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            decoration: BoxDecoration(
+              color: AppColors1.color2.withOpacity(0.9),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 5,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "أبواب الكتاب",
+                  style: TextStyle(
+                    fontSize: size.width / 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors1.color1,
+                  ),
+                ),
+                SizedBox(width: size.width / 28),
+                const Icon(Icons.menu_book, color: AppColors1.color1),
+              ],
+            ),
+          ),
         ),
         endDrawer: showCustomDrawer(size: size, context: context),
         body: Directionality(
@@ -120,47 +149,20 @@ class BookChaptersScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: AppColors1.color2.withOpacity(0.9),
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 5,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.menu_book, color: AppColors1.color1),
-                          SizedBox(width: size.width / 28),
-                          Text(
-                            "أبواب الكتاب",
-                            style: TextStyle(
-                              fontSize: size.width / 18,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors1.color1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     SizedBox(height: size.height / 40),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: bookChapter.length,
+                        itemCount: box!.getAt(0)!.chapter.length,
                         // separatorBuilder: (context, index) =>
                         //     const Divider(indent: 20, endIndent: 20),
                         itemBuilder: (context, index) {
-                          final chapter = bookChapter[index];
+                          // box.getAt(0)!.chapter[1].isChapterOpen
+                          final ChapterModelWithHive chapter =
+                              box!.getAt(0)!.chapter[index];
+                          // final chapter = bookChapter[index];
                           return InkWell(
                             onTap: () {
-                              if (bookChapter[index].isChapterOpen) {
+                              if (chapter.isChapterOpen) {
                                 // Navigator.push(
                                 //   context,
                                 //   MaterialPageRoute(
@@ -169,7 +171,7 @@ class BookChaptersScreen extends StatelessWidget {
                                 //     ),
                                 //   ),
                                 // );
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
@@ -211,7 +213,7 @@ class BookChaptersScreen extends StatelessWidget {
                                   Icon(
                                     Icons.lock,
                                     color: AppColors1.color1,
-                                    size: !bookChapter[index].isChapterOpen
+                                    size: !chapter.isChapterOpen
                                         ? size.width / 16
                                         : 0,
                                   ),

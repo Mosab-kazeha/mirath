@@ -1,16 +1,33 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mirath_merge/features/quizes/models/book_chapter_model.dart';
+import 'package:mirath_merge/BookChapters/BookChaptersScreen.dart';
+import 'package:mirath_merge/BookChapters/pdf_viewer_screen.dart';
+
+import 'package:mirath_merge/features/quizes/models/hive_chapter_model.dart';
+import 'package:mirath_merge/features/quizes/screens/quiz_screen.dart';
+import 'package:mirath_merge/features/quizes/screens/written_quiz_screen.dart';
 import 'package:mirath_merge/features/quizes/widgets/my_button.dart';
-import '../../../BookChapters/pdf_viewer_screen.dart';
+import 'package:provider/provider.dart';
 import '../../../core/resourses/colors.dart';
+import '../../../main.dart';
+import '../providers/quiz_provider.dart';
 import '../widgets/my_drawer.dart';
 import '../../../core/resourses/assets_manager.dart';
+import '../widgets/youtube_player.dart';
 
-class ExplainScreen extends StatelessWidget {
-  final BookChapterModel bookChapterModel;
-  const ExplainScreen({super.key, required this.bookChapterModel});
+// ignore: must_be_immutable
+class ExplainScreen extends StatefulWidget {
+  final ChapterModelWithHive bookChapterModel;
+  bool isVideoPlayed;
+  ExplainScreen(
+      {super.key, required this.bookChapterModel, required this.isVideoPlayed});
 
+  @override
+  State<ExplainScreen> createState() => _ExplainScreenState();
+}
+
+class _ExplainScreenState extends State<ExplainScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -45,107 +62,113 @@ class ExplainScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.all(size.width / 36),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PdfViewerScreen(
-                              pdfPath: bookChapterModel.pdf,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: size.width,
-                        height: size.height / 3,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          image: DecorationImage(
-                            image: AssetImage(cardImage),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: size.width / 4,
-                              top: size.width / 8,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  color: appBarBackgroundColor,
-                                  width: size.width / 2,
-                                  child: const Text(
-                                    "شرح المنهاج من حيث ميراث النبوة",
-                                    textDirection: TextDirection.rtl,
-                                    style: TextStyle(
-                                      color: darkBrown,
-                                      fontSize: 15,
-                                      fontFamily: "Almarai",
-                                      fontWeight: FontWeight.bold,
+                    child: widget.isVideoPlayed == false
+                        ? InkWell(
+                            onTap: () {
+                              widget.isVideoPlayed = true;
+                              setState(() {});
+                            },
+                            child: Container(
+                              width: size.width,
+                              height: size.height / 3,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                image: DecorationImage(
+                                  image: AssetImage(cardImage),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(10)),
+                                        color: lightBrown,
+                                      ),
+                                      width: size.width / 1.5,
+                                      child: const Center(
+                                        child: Text(
+                                          "شرح المنهاج من حيث ميراث النبوة",
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(
+                                            color: darkBrown,
+                                            fontSize: 15,
+                                            fontFamily: "Almarai",
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.01,
-                                ),
-                                Container(
-                                  color: darkerBrown,
-                                  width: size.width / 2,
-                                  height: size.height / 9,
-                                  child: const Center(
-                                    child: Text(
-                                      "مراجعة الوحي",
+                                    SizedBox(
+                                      height: size.height * 0.01,
+                                    ),
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.vertical(
+                                          bottom: Radius.circular(10),
+                                        ),
+                                        color: darkerBrown,
+                                      ),
+                                      width: size.width / 1.5,
+                                      height: size.height / 8,
+                                      child: Center(
+                                        child: Text(
+                                          widget.bookChapterModel.title,
+                                          textDirection: TextDirection.rtl,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            color: appBarBackgroundColor,
+                                            fontSize: 30,
+                                            fontFamily: "Almarai",
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: size.height * 0.01,
+                                    ),
+                                    const Text(
+                                      "إضغط لمشاهدة الشرح",
                                       textDirection: TextDirection.rtl,
                                       style: TextStyle(
                                         color: appBarBackgroundColor,
-                                        fontSize: 30,
+                                        fontSize: 20,
                                         fontFamily: "Almarai",
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: size.height * 0.01,
-                                ),
-                                const Text(
-                                  "الباب الأول",
-                                  textDirection: TextDirection.rtl,
-                                  style: TextStyle(
-                                    color: appBarBackgroundColor,
-                                    fontSize: 20,
-                                    fontFamily: "Almarai",
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
+                          )
+                        : YoutubeVideoPlayer(
+                            videoUrl: widget.bookChapterModel.videoUrl!,
                           ),
-                        ),
-                      ),
-                    ),
                   ),
                   SizedBox(
                     height: size.height * 0.04,
                   ),
-                  const Text(
-                    "الحلقة : 01",
+                  //! what do you mean by First Epesot
+                  Text(
+                    "الحلقة : ${widget.bookChapterModel.chapterIndex}",
                     textDirection: TextDirection.rtl,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: darkerBrown,
                       fontSize: 30,
                       fontFamily: "Almarai",
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
-                    "مرجعية الوحي",
+                  Text(
+                    widget.bookChapterModel.title,
                     textDirection: TextDirection.rtl,
-                    style: TextStyle(
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
                       color: darkerBrown,
                       fontSize: 30,
                       fontFamily: "Almarai",
@@ -155,25 +178,57 @@ class ExplainScreen extends StatelessWidget {
                   SizedBox(
                     height: size.height * 0.02,
                   ),
+
                   MyButton(
-                    onTap: () {},
+                    onTap: () async {
+                      if (widget.bookChapterModel.chapterSimmary == null) {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          allowMultiple: false,
+                          type: FileType.custom,
+                          allowedExtensions: ['pdf'],
+                        );
+
+                        widget.bookChapterModel.chapterSimmary =
+                            result!.files.single.path!;
+                        await box!.getAt(0)!.save();
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (conter) {
+                              return PdfViewerScreen(
+                                pdfPath:
+                                    widget.bookChapterModel.chapterSimmary!,
+                                isPdfFile: true,
+                              );
+                            },
+                          ),
+                        );
+                      }
+                    },
                     buttonColor: lightBrown,
                     buttonWidth: size.width / 2,
                     textColor: darkBrown,
                     buttonHeight: size.height / 18,
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "ارفع تلخيصك",
-                          style: TextStyle(
+                          widget.bookChapterModel.chapterSimmary == null
+                              ? "إرفع تلخيصك"
+                              : "إعرض تلخيصك",
+                          style: const TextStyle(
                             color: darkBrown,
+                            fontWeight: FontWeight.bold,
                             fontSize: 16,
                             fontFamily: 'Almarai',
                           ),
                         ),
                         Icon(
-                          Icons.file_open_outlined,
+                          widget.bookChapterModel.chapterSimmary == null
+                              ? Icons.file_open_outlined
+                              : Icons.file_open,
                           color: darkBrown,
                         )
                       ],
@@ -183,43 +238,24 @@ class ExplainScreen extends StatelessWidget {
                     height: size.height * 0.02,
                   ),
                   MyButton(
-                    onTap: () {},
-                    buttonColor: lightBrown,
-                    buttonWidth: size.width / 2,
-                    textColor: darkBrown,
-                    buttonHeight: size.height / 18,
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "اكتب تلخيصك",
-                          style: TextStyle(
-                            color: darkBrown,
-                            fontSize: 16,
-                            fontFamily: 'Almarai',
-                          ),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BookChaptersScreen(),
                         ),
-                        Icon(
-                          Icons.edit_outlined,
-                          color: darkBrown,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.02,
-                  ),
-                  MyButton(
-                    onTap: () {},
+                      );
+                    },
                     buttonColor: darkerBrown,
                     buttonWidth: size.width / 2,
                     textColor: darkBrown,
                     buttonHeight: size.height / 18,
                     child: const Text(
-                      "اكتب تلخيصك",
+                      "عودة الي الأبواب",
                       style: TextStyle(
                         color: lightBrown,
                         fontSize: 16,
+                        fontWeight: FontWeight.bold,
                         fontFamily: 'Almarai',
                       ),
                     ),
@@ -227,11 +263,37 @@ class ExplainScreen extends StatelessWidget {
                   SizedBox(
                     height: size.height * 0.04,
                   ),
+                  // MyButton(
+                  //   onTap: () {},
+                  //   buttonColor: darkerBrown,
+                  //   buttonWidth: size.width / 2,
+                  //   textColor: darkBrown,
+                  //   buttonHeight: size.height / 18,
+                  //   child: const Text(
+                  //     " قيم نفسك",
+                  //     style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       color: lightBrown,
+                  //       fontSize: 16,
+                  //       fontFamily: 'Almarai',
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: size.height * 0.02,
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       MyButton(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const WrittenQuizScreen(),
+                            ),
+                          );
+                        },
                         buttonColor: lightBrown,
                         buttonWidth: size.width / 2.5,
                         textColor: darkBrown,
@@ -239,6 +301,7 @@ class ExplainScreen extends StatelessWidget {
                         child: const Text(
                           "اختبر فهمك",
                           style: TextStyle(
+                            fontWeight: FontWeight.bold,
                             color: darkBrown,
                             fontSize: 16,
                             fontFamily: 'Almarai',
@@ -246,7 +309,18 @@ class ExplainScreen extends StatelessWidget {
                         ),
                       ),
                       MyButton(
-                        onTap: () {},
+                        onTap: () {
+                          Provider.of<QuizProvider>(context, listen: false)
+                              .selectQuiz(widget.bookChapterModel.chapterIndex);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => QuizScreen(
+                                chapter: widget.bookChapterModel,
+                              ),
+                            ),
+                          );
+                        },
                         buttonColor: lightBrown,
                         buttonWidth: size.width / 2.5,
                         textColor: darkBrown,
@@ -254,6 +328,7 @@ class ExplainScreen extends StatelessWidget {
                         child: const Text(
                           "أطور مهاراتي",
                           style: TextStyle(
+                            fontWeight: FontWeight.bold,
                             color: darkBrown,
                             fontSize: 16,
                             fontFamily: 'Almarai',

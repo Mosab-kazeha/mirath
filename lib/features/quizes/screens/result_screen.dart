@@ -1,23 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:mirath_merge/BookChapters/BookChaptersScreen.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:mirath_merge/core/resourses/colors.dart';
-
-import '../../../core/config/Sharedpref.dart';
+import '../../../main.dart';
 
 // ignore: must_be_immutable
 class ResultScreen extends StatelessWidget {
-  double levelOfProgress;
-  ResultScreen({
-    super.key,
-    required this.levelOfProgress,
-  });
+  const ResultScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final mirathStorage = box!.getAt(0)!;
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
@@ -30,21 +25,22 @@ class ResultScreen extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      getIt.get<SharedPreferences>().getString("name")!,
+                      // getIt.get<SharedPreferences>().getString("name")!,
+                      box!.getAt(0)!.userName!,
                       style: TextStyle(
                         fontSize: size.width / 18,
                         fontWeight: FontWeight.bold,
                         color: const Color.fromARGB(255, 67, 37, 11),
                       ),
                     ),
-                    Text(
-                      "motlaqshahed@gmail.com",
-                      style: TextStyle(
-                        fontSize: size.width / 32,
-                        fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 67, 37, 11),
-                      ),
-                    ),
+                    // Text(
+                    //   "motlaqshahed@gmail.com",
+                    //   style: TextStyle(
+                    //     fontSize: size.width / 32,
+                    //     fontWeight: FontWeight.bold,
+                    //     color: const Color.fromARGB(255, 67, 37, 11),
+                    //   ),
+                    // ),
                   ],
                 ),
                 SizedBox(width: size.width / 28),
@@ -63,7 +59,12 @@ class ResultScreen extends StatelessWidget {
           backgroundColor: darkerBrown,
           leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BookChaptersScreen(),
+                ),
+              );
             },
             icon: const Icon(
               Icons.arrow_back_sharp,
@@ -120,7 +121,7 @@ class ResultScreen extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        '${100 - levelOfProgress.toInt()}%',
+                        '${100 - mirathStorage.levelOfProgress.toInt()}%',
                         style: TextStyle(
                           fontSize: size.width / 6,
                           color: darkerBrown,
@@ -139,7 +140,7 @@ class ResultScreen extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        '${levelOfProgress.toInt()}%',
+                        '${mirathStorage.levelOfProgress.toInt()}%',
                         style: TextStyle(
                           fontSize: size.width / 6,
                           color: darkerBrown,
@@ -172,7 +173,7 @@ class ResultScreen extends StatelessWidget {
                     radius: size.width / 3,
                     lineWidth: size.width / 17,
                     animation: true,
-                    percent: levelOfProgress / 100,
+                    percent: mirathStorage.levelOfProgress / 100,
                     backgroundWidth: 10,
                     circularStrokeCap: CircularStrokeCap.round,
                     backgroundColor: const Color(0xFFD2B48C), // Light brown
@@ -181,7 +182,7 @@ class ResultScreen extends StatelessWidget {
                       radius: size.width / 4.2,
                       backgroundColor: const Color(0xFF6B4F30),
                       child: Text(
-                        "${levelOfProgress.toInt()}%",
+                        "${mirathStorage.levelOfProgress.toInt()}%",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: size.width / 6.5,

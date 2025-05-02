@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import '/core/resourses/colors.dart';
 
 class Option extends StatelessWidget {
@@ -6,18 +8,20 @@ class Option extends StatelessWidget {
   final String text;
   final bool isCorrect;
   final VoidCallback onTap;
+  Color optionColor;
 
-  const Option({
+  Option({
     super.key,
     required this.lable,
     required this.text,
     required this.isCorrect,
     required this.onTap,
+    required this.optionColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textstyle = TextStyle(
+    TextStyle textstyle = const TextStyle(
       color: darkBrown,
       fontSize: 20,
       fontFamily: 'Almarai-Regular',
@@ -27,11 +31,11 @@ class Option extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           decoration: BoxDecoration(
             color: light,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: darkBrown, width: 4),
+            border: Border.all(color: optionColor, width: 4),
           ),
           child: Row(
             children: [
@@ -43,7 +47,7 @@ class Option extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 10),
+                margin: const EdgeInsets.only(left: 10),
                 height: 40,
                 width: 40,
                 decoration: BoxDecoration(
@@ -53,7 +57,7 @@ class Option extends StatelessWidget {
                 child: Center(
                   child: Text(
                     lable,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: light,
                       fontSize: 20,
                       fontFamily: 'Almarai-Regular',

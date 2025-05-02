@@ -3,9 +3,8 @@ import 'dart:ui' show ImageFilter;
 import 'package:flutter/material.dart';
 import 'package:mirath_merge/BookChapters/BookChaptersScreen.dart';
 import 'package:mirath_merge/core/resourses/colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mirath_merge/main.dart';
 
-import '../../../core/config/Sharedpref.dart';
 import '../../../core/resourses/assets_manager.dart';
 import '../../../core/resourses/genaral_function/function.dart';
 
@@ -61,156 +60,155 @@ class _SignUiState extends State<SignUi> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  background,
-                )),
-          ),
-          child: Center(
-            child: FadeTransition(
-                opacity: _fadeAnimation,
-                child: SlideTransition(
-                  position: _slideAnimation,
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(11)),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.7,
-                        height: MediaQuery.of(context).size.height * 0.39,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                          borderRadius: const BorderRadius.all(Radius.circular(11)),
-                          color: const Color(0xffFFFFFF).withOpacity(0.6),
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(
+                background,
+              )),
+        ),
+        child: Center(
+          child: FadeTransition(
+            opacity: _fadeAnimation,
+            child: SlideTransition(
+              position: _slideAnimation,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(11)),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    height: MediaQuery.of(context).size.height * 0.39,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius: const BorderRadius.all(Radius.circular(11)),
+                      color: const Color(0xffFFFFFF).withOpacity(0.6),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AnimatedOpacity(
+                          opacity: opacity,
+                          duration: const Duration(seconds: 1),
+                          child: const Text(
+                            "انشاء حساب     \n أهلاً وسهلا بك ",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: darkerBrown,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15,
+                            ),
+                          ),
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AnimatedOpacity(
-                              opacity: opacity,
-                              duration: const Duration(seconds: 1),
-                              child: const Text(
-                                "انشاء حساب     \n أهلاً وسهلا بك ",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: darkerBrown,
+                        Padding(
+                          padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            decoration: BoxDecoration(
+                              color: light.withOpacity(0.7),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 6),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(color: light),
+                            ),
+                            child: TextFormField(
+                              controller: nameController,
+                              style: const TextStyle(color: darkerBrown),
+                              decoration: const InputDecoration(
+                                hintStyle: TextStyle(
+                                  color: Color.fromARGB(255, 132, 112, 104),
                                   fontWeight: FontWeight.normal,
-                                  fontSize: 15,
+                                ),
+
+                                border: InputBorder.none,
+                                //! عم زبط استواء الايقونة من النص
+                                contentPadding:
+                                    EdgeInsets.symmetric(vertical: 12),
+                                hintText: "اسم المستخدم",
+                                prefixIcon: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 12),
+                                  child: Icon(Icons.person, color: darkerBrown),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(
-                                MediaQuery.of(context).size.width * 0.05,
-                              ),
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.05,
-                                decoration: BoxDecoration(
-                                  color: light.withOpacity(0.7),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.3),
-                                      blurRadius: 10,
-                                      offset: const Offset(0, 6),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(30),
-                                  border: Border.all(color: light),
-                                ),
-                                child: TextFormField(
-                                  controller: nameController,
-                                  style: const TextStyle(color: darkerBrown),
-                                  decoration: const InputDecoration(
-                                    hintStyle: TextStyle(
-                                      color: Color.fromARGB(
-                                          255, 132, 112, 104),
-                                      fontWeight: FontWeight.normal,
-                                    ),
-
-                                    border: InputBorder.none,
-                                    //! عم زبط استواء الايقونة من النص
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 12),
-                                    hintText: "اسم المستخدم",
-                                    prefixIcon: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 12),
-                                      child: Icon(Icons.person,
-                                          color: darkerBrown),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                String inputName = nameController.text.trim();
-                                if (inputName.isNotEmpty) {
-                                  await getIt
-                                      .get<SharedPreferences>()
-                                      .setString("name", inputName);
-
-                                  // String? savedName = await getIt
-                                  //     .get<SharedPreferences>()
-                                  //     .getString("name");
-
-                                  // if (savedName != null &&
-                                  //     savedName.isNotEmpty) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                             BookChaptersScreen(),
-                                      ),
-                                    );
-                                  // } else {
-                                  //   print(" خطأ: لم يتم حفظ الاسم بشكل صحيح.");
-                                  // }
-                                } else {
-                                  showTopSnackBar(context,
-                                      "الرجاء إدخال الاسم قبل المتابعة",
-                                      color: const Color.fromARGB(
-                                          255, 215, 161, 161));
-                                  print(" الرجاء إدخال الاسم قبل المتابعة.");
-                                }
-                              },
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.6,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.046,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.4),
-                                      blurRadius: 10,
-                                      offset: const Offset(0, 6),
-                                    ),
-                                  ],
-                                  color: light,
-                                  borderRadius: BorderRadius.circular(30),
-                                  border: Border.all(color: light),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "هيا بنا",
-                                    style: TextStyle(
-                                        color: darkBrown,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        InkWell(
+                          onTap: () async {
+                            String inputName = nameController.text.trim();
+                            if (inputName.isNotEmpty) {
+                              // await getIt
+                              //     .get<SharedPreferences>()
+                              //     .setString("name", inputName);
+
+                              box!.getAt(0)!.userName = inputName;
+                              await box!.getAt(0)!.save();
+
+                              // String? savedName = await getIt
+                              //     .get<SharedPreferences>()
+                              //     .getString("name");
+
+                              // if (savedName != null &&
+                              //     savedName.isNotEmpty) {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => BookChaptersScreen(),
+                                ),
+                              );
+                              // } else {
+                              //   print(" خطأ: لم يتم حفظ الاسم بشكل صحيح.");
+                              // }
+                            } else {
+                              showTopSnackBar(
+                                  context, "الرجاء إدخال الاسم قبل المتابعة",
+                                  color:
+                                      const Color.fromARGB(255, 215, 161, 161));
+                              print(" الرجاء إدخال الاسم قبل المتابعة.");
+                            }
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            height: MediaQuery.of(context).size.height * 0.046,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.4),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 6),
+                                ),
+                              ],
+                              color: light,
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(color: light),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "هيا بنا",
+                                style: TextStyle(
+                                    color: darkBrown,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                )),
-          )),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -6,14 +6,14 @@ class MyContainer extends StatelessWidget {
   final double height;
   final String title;
   final bool isSquare;
-  final Widget icon;
+  final Widget widget;
   const MyContainer({
     super.key,
     required this.width,
     required this.height,
     required this.isSquare,
     required this.title,
-    required this.icon,
+    required this.widget,
   });
 
   @override
@@ -40,10 +40,11 @@ class MyContainer extends StatelessWidget {
                 CircleAvatar(
                   radius: 30,
                   backgroundColor: darkerBrown,
-                  child: icon,
+                  child: widget,
                 ),
                 Text(
                   title,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: darkerBrown,
                     fontWeight: FontWeight.bold,
@@ -59,10 +60,11 @@ class MyContainer extends StatelessWidget {
                 CircleAvatar(
                   radius: 25,
                   backgroundColor: darkerBrown,
-                  child: icon,
+                  child: widget,
                 ),
                 Text(
                   title,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: darkerBrown,
                     fontWeight: FontWeight.bold,

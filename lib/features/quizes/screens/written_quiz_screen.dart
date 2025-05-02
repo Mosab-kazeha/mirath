@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mirath_merge/features/quizes/screens/quiz_screen.dart';
+import 'package:mirath_merge/features/quizes/screens/result_screen.dart';
 import 'package:provider/provider.dart';
 import '../widgets/my_drawer.dart';
 import '/core/resourses/colors.dart';
@@ -39,221 +39,224 @@ class _WrittenQuizScreenState extends State<WrittenQuizScreen> {
     int numberOfQuestion = currentQuiz.questions.length;
     int questionNumber = 1;
 
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 80,
-        centerTitle: true,
-        backgroundColor: appBarBackgroundColor,
-        title: SvgPicture.asset(logoImage),
-      ),
-      endDrawer: showCustomDrawer(size: size, context: context),
-      resizeToAvoidBottomInset: true,
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(quizBackgroundImage),
-            fit: BoxFit.cover,
-          ),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 80,
+          centerTitle: true,
+          backgroundColor: appBarBackgroundColor,
+          title: SvgPicture.asset(logoImage),
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: size.width * 0.02,
-            vertical: size.height * 0.01,
+        endDrawer: showCustomDrawer(size: size, context: context),
+        resizeToAvoidBottomInset: true,
+        body: Container(
+          width: size.width,
+          height: size.height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(quizBackgroundImage),
+              fit: BoxFit.cover,
+            ),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: size.height * 0.04),
-                const MyTitle(title: "أطور مهاراتي"),
-                SizedBox(height: size.height * 0.04),
-                const Text(
-                  "إبدأ الاختبار الآن",
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                    color: darkBrown,
-                    fontFamily: 'Almarai',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: size.width * 0.02,
+              vertical: size.height * 0.01,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: size.height * 0.04),
+                  const MyTitle(title: "أطور مهاراتي"),
+                  SizedBox(height: size.height * 0.04),
+                  const Text(
+                    "إبدأ الاختبار الآن",
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                      color: darkBrown,
+                      fontFamily: 'Almarai',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                SizedBox(height: size.height * 0.02),
-                SizedBox(
-                  height: 50,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (ctx, i) {
-                      return Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: CircleAvatar(
-                          backgroundColor: darkBrown,
-                          radius: 15,
-                          child: Center(
-                            child: Text(
-                              "${i + 1}",
-                              style: const TextStyle(
-                                color: light,
-                                fontFamily: 'Almarai',
-                                fontSize: 16,
+                  SizedBox(height: size.height * 0.02),
+                  SizedBox(
+                    height: 50,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (ctx, i) {
+                        return Padding(
+                          padding: const EdgeInsets.all(4),
+                          child: CircleAvatar(
+                            backgroundColor: darkBrown,
+                            radius: 15,
+                            child: Center(
+                              child: Text(
+                                "${i + 1}",
+                                style: const TextStyle(
+                                  color: light,
+                                  fontFamily: 'Almarai',
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                    itemCount: (numberOfQuestion / 2).toInt(),
-                  ),
-                ),
-                SizedBox(height: size.height * 0.02),
-                Container(
-                  alignment: Alignment.center,
-                  width: size.width * 0.9,
-                  height: size.height * 0.2,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: darkBrown,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Consumer<WrittenQuizProvider>(
-                    builder: (context, quizProvider, child) {
-                      return Text(
-                        quizProvider.currentQuestion.question,
-                        // ". ما هو أول أمر مطلوب من المسلم تجاه مرجعية الوحي؟",
-                        textAlign: TextAlign.center,
-                        textDirection: TextDirection.rtl,
-                        style: const TextStyle(
-                          color: light,
-                          height: 2,
-                          fontFamily: 'Almarai',
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(height: size.height * 0.08),
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: size.width * 0.9,
-                      height: size.height * 0.2,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: darkBrown,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      //here there is a problem that ia not changing the question automatically
-                      child: Consumer<WrittenQuizProvider>(
-                        builder: (context, quizProvider, child) {
-                          return quizProvider.showCorrect
-                              ? Text(
-                                  quizProvider.currentQuestion.answer,
-                                  // "هو التسليم التام والرد إلى ورسوله، وذلك من خلال الرجوع إلى القران والسنة.",
-                                  textAlign: TextAlign.center,
-                                  textDirection: TextDirection.rtl,
-                                  style: const TextStyle(
-                                    color: light,
-                                    height: 2,
-                                    fontFamily: 'Almarai',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              : TextFormField(
-                                  textDirection: TextDirection.rtl,
-                                  cursorColor: lightBrown,
-                                  style: TextStyle(color: light),
-                                  decoration: InputDecoration(
-                                    hintText: "اكتب إجابتك هنا",
-                                    hintStyle: TextStyle(
-                                        color: light.withOpacity(0.5)),
-                                    hintTextDirection: TextDirection.rtl,
-                                    border: InputBorder.none,
-                                  ),
-                                );
-                        },
-                      ),
+                        );
+                      },
+                      itemCount: (numberOfQuestion / 2).toInt(),
                     ),
-                    Positioned(
-                      right: -20,
-                      top: -40,
-                      child: Image.asset(noteBookImage),
-                    )
-                  ],
-                ),
-                SizedBox(height: size.height * 0.01),
-                ElevatedButton(
-                  onPressed: () {
-                    quizProvider.showAnswer();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: light,
-                    maximumSize: Size(size.width * 0.4, 40),
-                    shape: RoundedRectangleBorder(
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  Container(
+                    alignment: Alignment.center,
+                    width: size.width * 0.9,
+                    height: size.height * 0.2,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: darkBrown,
                       borderRadius: BorderRadius.circular(20),
                     ),
+                    child: Consumer<WrittenQuizProvider>(
+                      builder: (context, quizProvider, child) {
+                        return Text(
+                          quizProvider.currentQuestion.question,
+                          // ". ما هو أول أمر مطلوب من المسلم تجاه مرجعية الوحي؟",
+                          textAlign: TextAlign.center,
+                          textDirection: TextDirection.rtl,
+                          style: const TextStyle(
+                            color: light,
+                            height: 2,
+                            fontFamily: 'Almarai',
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  SizedBox(height: size.height * 0.05),
+                  Stack(
+                    clipBehavior: Clip.none,
                     children: [
-                      Text(
-                        "قيّم إجابتك ",
-                        style: TextStyle(
+                      Container(
+                        alignment: Alignment.center,
+                        width: size.width * 0.9,
+                        height: size.height * 0.2,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        decoration: BoxDecoration(
                           color: darkBrown,
-                          fontSize: 16,
-                          fontFamily: 'Almarai',
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        //here there is a problem that ia not changing the question automatically
+                        child: Consumer<WrittenQuizProvider>(
+                          builder: (context, quizProvider, child) {
+                            return quizProvider.showCorrect
+                                ? Text(
+                                    quizProvider.currentQuestion.answer,
+                                    // "هو التسليم التام والرد إلى ورسوله، وذلك من خلال الرجوع إلى القران والسنة.",
+                                    textAlign: TextAlign.center,
+                                    textDirection: TextDirection.rtl,
+                                    style: const TextStyle(
+                                      color: light,
+                                      height: 2,
+                                      fontFamily: 'Almarai',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                : TextFormField(
+                                    textDirection: TextDirection.rtl,
+                                    cursorColor: lightBrown,
+                                    style: TextStyle(color: light),
+                                    decoration: InputDecoration(
+                                      hintText: "اكتب إجابتك هنا",
+                                      hintStyle: TextStyle(
+                                          color: light.withOpacity(0.5)),
+                                      hintTextDirection: TextDirection.rtl,
+                                      border: InputBorder.none,
+                                    ),
+                                  );
+                          },
                         ),
                       ),
-                      Icon(
-                        Icons.question_answer_rounded,
-                        color: darkBrown,
+                      Positioned(
+                        right: -20,
+                        top: -40,
+                        child: Image.asset(noteBookImage),
                       )
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        --questionNumber;
-                        quizProvider.previousQuestion();
-                        quizProvider.reset();
-                      },
-                      icon: const Icon(
-                        Icons.keyboard_double_arrow_left_outlined,
-                        color: darkBrown,
+                  SizedBox(height: size.height * 0.01),
+                  ElevatedButton(
+                    onPressed: () {
+                      quizProvider.showAnswer();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: light,
+                      maximumSize: Size(size.width * 0.4, 40),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        ++questionNumber;
-                        quizProvider.nextQuestion();
-                        quizProvider.reset();
-                        print(currentQuiz.questions.length);
-                        if (numberOfQuestion / 2 == questionNumber) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => QuizScreen(),
-                            ),
-                          );
-                        }
-                      },
-                      icon: const Icon(
-                        Icons.keyboard_double_arrow_right_outlined,
-                        color: darkBrown,
-                      ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "قيّم إجابتك ",
+                          style: TextStyle(
+                            color: darkBrown,
+                            fontSize: 16,
+                            fontFamily: 'Almarai',
+                          ),
+                        ),
+                        Icon(
+                          Icons.question_answer_rounded,
+                          color: darkBrown,
+                        )
+                      ],
                     ),
-                  ],
-                )
-              ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          --questionNumber;
+                          quizProvider.previousQuestion();
+                          quizProvider.reset();
+                        },
+                        icon: const Icon(
+                          Icons.keyboard_double_arrow_left_outlined,
+                          color: darkBrown,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          ++questionNumber;
+                          quizProvider.nextQuestion();
+                          quizProvider.reset();
+                          print(currentQuiz.questions.length);
+                          if (numberOfQuestion / 2 == questionNumber) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ResultScreen(),
+                              ),
+                            );
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.keyboard_double_arrow_right_outlined,
+                          color: darkBrown,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
