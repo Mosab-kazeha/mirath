@@ -12,7 +12,7 @@ class MyTitle extends StatelessWidget {
       alignment: Alignment.center,
       width: 225,
       height: 46,
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       decoration: BoxDecoration(
         color: darkBrown,
         borderRadius: BorderRadius.circular(20),
@@ -20,7 +20,7 @@ class MyTitle extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             color: light,
             fontSize: 16,
             fontFamily: 'Almarai',

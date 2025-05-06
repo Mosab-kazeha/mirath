@@ -13,7 +13,7 @@ class ProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textstyle = TextStyle(
+    TextStyle textstyle = const TextStyle(
       color: darkBrown,
       fontSize: 16,
       fontFamily: "",
