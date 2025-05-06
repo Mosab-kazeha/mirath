@@ -9,6 +9,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/J33HQ_cKCGg?si=09bI7nkO3UeMkaom",
     voice: "voice/voice1.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 2,
@@ -18,6 +19,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/bzXml1w91PM?si=ODiXZ5EF3bBBN05_",
     voice: "voice/voice2.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 3,
@@ -27,6 +29,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/wL3hGYC-KwQ?si=7jih7ydjSZZ4I3wX",
     voice: "voice/voice3.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 4,
@@ -36,6 +39,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/00t-5zOu718?si=4v4BqM8py3-NKDWi",
     voice: "voice/voice4.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 5,
@@ -45,6 +49,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/yuPOm6FNofg?si=x_TM9LyoYzjvjOuR",
     voice: "voice/voice5.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 6,
@@ -54,6 +59,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/9O73OIoIeGo?si=CY6PO2BDMQg4ICbD",
     voice: "voice/voice6.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 7,
@@ -63,6 +69,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/hqcxatX64lU?si=3oqaNSKZ8wkFUIwZ",
     voice: "voice/voice7.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 8,
@@ -72,6 +79,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/LlwcVBgEX4s?si=f6IAENPzgX0Km3cY",
     voice: "voice/voice8.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 9,
@@ -81,6 +89,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/OufFoZ9GW8w?si=wKw7IBYEmNMBzHsB",
     voice: "voice/voice9.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 10,
@@ -90,6 +99,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/9Orfd_ipLo0?si=Kp3BFOBqKisJ7uEX",
     voice: "voice/voice10.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 11,
@@ -99,6 +109,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/2TbI2NhTAd0?si=pt8twPHYZz23h9nj",
     voice: "voice/voice11.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 12,
@@ -108,6 +119,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/EUVNpqARKCY?si=kcOINXoKviVnKGIr",
     voice: "voice/voice12.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 13,
@@ -117,6 +129,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/m6ZCSN9hjw0?si=UWFtTPGBZzEjPwUu",
     voice: "voice/voice13.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 14,
@@ -126,6 +139,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/hLRNOURdvHQ?si=wnVyypYyiqZAHoD1",
     voice: "voice/voice14.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 15,
@@ -135,6 +149,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/LIv3jGC2dSo?si=efzQO6xfkX2pai8c",
     voice: "voice/voice15.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 16,
@@ -144,6 +159,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/aZ3h7rx3v48?si=LzNVscq489mLupm3",
     voice: "voice/voice16.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 17,
@@ -153,6 +169,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/q15xVxnWk9U?si=DQSgRLi-LIQML2qR",
     voice: "voice/voice17.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 18,
@@ -162,6 +179,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/sQ47L7sBFt4?si=wqATsAl27rfy43pu",
     voice: "voice/voice18.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 19,
@@ -171,6 +189,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/4Khn_-ip4tY?si=UBiB3xkBeeQJZ57Y",
     voice: "voice/voice19.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 20,
@@ -180,6 +199,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/W_CbgOileZI?si=74Ah77Eb3zrp7nMo",
     voice: "voice/voice20.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 21,
@@ -189,6 +209,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/A8jGgA1dSUg?si=LgmmDVEpP-L1uOZx",
     voice: "voice/voice21.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 22,
@@ -198,6 +219,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/UlPIIFBQzJc?si=il0xG-xbNyhmOTF7",
     voice: "voice/voice22.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 23,
@@ -207,6 +229,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/6LK4A1IOmFE?si=Tc6YJ8PURrfdYxi9",
     voice: "voice/voice23.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 24,
@@ -216,6 +239,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/DnjMfeARpXQ?si=yKzgSQUW9EOfzmDh",
     voice: "voice/voice24.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 25,
@@ -225,6 +249,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/G1DOGo4Rie0?si=eC32Aj-EkIHTcZcp",
     voice: "voice/voice25.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 26,
@@ -234,6 +259,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/YduAIggiUGY?si=eCgeZp-e6QK0uKmu",
     voice: "voice/voice26.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 27,
@@ -243,6 +269,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/MeCpl7O9bj0?si=vK9acnDlRMhRR1tG",
     voice: "voice/voice27.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 28,
@@ -252,6 +279,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/6Bf_JJd3LNY?si=qdtl37gpnMyIhr6p",
     voice: "voice/voice28.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 29,
@@ -261,6 +289,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/luc_NCdRtMw?si=al521CNnnF00tc_Z",
     voice: "voice/voice29.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 30,
@@ -270,6 +299,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/tzXsTqXNOq8?si=wDu178ojGC5xfZGc",
     voice: "voice/voice30.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 31,
@@ -279,6 +309,7 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/-chYKXp9oNI?si=u1ub5PsL6bi5ztfp",
     voice: "voice/voice31.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
   ChapterModelWithHive(
     chapterIndex: 32,
@@ -288,5 +319,6 @@ List<ChapterModelWithHive> bookChapter = [
     videoUrl: "https://youtu.be/-chYKXp9oNI?si=u1ub5PsL6bi5ztfp",
     voice: "voice/voice31.ogg",
     chapterSimmary: null,
+    chapterDegree: null,
   ),
 ];

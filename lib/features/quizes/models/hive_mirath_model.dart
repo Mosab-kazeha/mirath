@@ -22,7 +22,11 @@ class MirathModelWithHive extends HiveObject {
   @HiveField(4)
   int numberOfCompletedChapter;
 
+  @HiveField(5)
+  bool isFirstTime;
+
   MirathModelWithHive({
+    required this.isFirstTime,
     required this.numberOfCompletedChapter,
     required this.userName,
     required this.levelOfProgress,

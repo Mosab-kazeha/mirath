@@ -20,7 +20,7 @@ class MyTitle extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             color: light,
             fontSize: 16,
             fontFamily: 'Almarai',

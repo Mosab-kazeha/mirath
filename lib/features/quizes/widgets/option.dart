@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '/core/resourses/colors.dart';
 
+// ignore: must_be_immutable
 class Option extends StatelessWidget {
   final String lable;
   final String text;

@@ -6,7 +6,7 @@ import 'package:mirath_merge/main.dart';
 import '../../../core/resourses/assets_manager.dart';
 import '../../../core/resourses/colors.dart';
 import '../screens/profile_screen.dart';
-import '../screens/setting_button.dart';
+import 'setting_button.dart';
 
 Widget showCustomDrawer({
   TextStyle? textstyle,
@@ -50,7 +50,7 @@ Widget showCustomDrawer({
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => BookChaptersScreen(),
+                builder: (context) => const BookChaptersScreen(),
               ),
             );
           },
@@ -118,7 +118,7 @@ Widget showCustomDrawer({
             box!.getAt(0)!.userName = null;
             await box!.getAt(0)!.save();
 
-            Navigator.push(
+            Navigator.pushReplacement(
               // ignore: use_build_context_synchronously
               context,
               MaterialPageRoute(

@@ -24,7 +24,8 @@ class ChapterModelWithHiveAdapter extends TypeAdapter<ChapterModelWithHive> {
       chapterIndex: fields[0] as int,
       isChapterOpen: fields[3] as bool,
       videoUrl: fields[4] as String?,
-    )..chapterDegree = fields[7] as int?;
+      chapterDegree: fields[7] as int?,
+    );
   }
 
   @override

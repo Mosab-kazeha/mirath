@@ -17,6 +17,7 @@ class MirathModelWithHiveAdapter extends TypeAdapter<MirathModelWithHive> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return MirathModelWithHive(
+      isFirstTime: fields[5] as bool,
       numberOfCompletedChapter: fields[4] as int,
       userName: fields[3] as String?,
       levelOfProgress: fields[2] as double,
@@ -28,7 +29,7 @@ class MirathModelWithHiveAdapter extends TypeAdapter<MirathModelWithHive> {
   @override
   void write(BinaryWriter writer, MirathModelWithHive obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.chapter)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class MirathModelWithHiveAdapter extends TypeAdapter<MirathModelWithHive> {
       ..writeByte(3)
       ..write(obj.userName)
       ..writeByte(4)
-      ..write(obj.numberOfCompletedChapter);
+      ..write(obj.numberOfCompletedChapter)
+      ..writeByte(5)
+      ..write(obj.isFirstTime);
   }
 
   @override

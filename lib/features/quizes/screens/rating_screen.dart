@@ -1,3 +1,4 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:mirath_merge/main.dart';
 import '../../../BookChapters/colorss.dart';
@@ -12,7 +13,7 @@ class RatingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    MirathModelWithHive mirath = box!.getAt(0)!;
+    MirathModelWithHive mirathStorage = box!.getAt(0)!;
 
     return Directionality(
       textDirection: TextDirection.ltr,
@@ -52,48 +53,64 @@ class RatingScreen extends StatelessWidget {
           ),
         ),
         endDrawer: showCustomDrawer(size: size, context: context),
-        body: Directionality(
-          textDirection: TextDirection.rtl,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: Image.asset(
-                  "images/Bitmap.png",
-                  fit: BoxFit.cover,
-                ),
+        body:  DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            backgroundColor: darkBrown,
+            content: Text(
+              'إضغط مرة ثانية للخروج من التطبيق',
+              style: TextStyle(
+                color: darkerBrown,
+                fontWeight: FontWeight.bold,
               ),
-              Positioned.fill(
-                child: Container(
-                  color: Colors.white.withOpacity(0.4),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: size.width * 0.04,
-                    crossAxisSpacing: size.width * 0.04,
+            ),
+          ),
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Image.asset(
+                    "images/Bitmap.png",
+                    fit: BoxFit.cover,
                   ),
-                  itemCount: mirath.numberOfCompletedChapter,
-                  itemBuilder: (context, index) => MyContainer(
-                    widget: Text(
-                      "${mirath.chapter[index].chapterDegree}%",
-                      style: const TextStyle(
-                        color: light,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        fontFamily: 'Almarai',
+                ),
+                Positioned.fill(
+                  child: Container(
+                    color: Colors.white.withOpacity(0.4),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: size.width * 0.04,
+                        crossAxisSpacing: size.width * 0.04,
                       ),
-                    ),
-                    width: size.width / 2.5,
-                    height: size.height / 6,
-                    isSquare: true,
-                    title: mirath.chapter[index].title,
-                  ),
+                      itemCount: mirathStorage.numberOfCompletedChapter,
+                      itemBuilder: (context, index) =>
+                          // mirath.chapter[index].chapterDegree != null
+                          //     ?
+                          MyContainer(
+                            widget: Text(
+                              "${mirathStorage.chapter[index].chapterDegree}%",
+                              style: const TextStyle(
+                                color: light,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                fontFamily: 'Almarai',
+                              ),
+                            ),
+                            width: size.width / 2.5,
+                            height: size.height / 6,
+                            isSquare: true,
+                            title: mirathStorage.chapter[index].title,
+                          )
+                      // : const SizedBox(),
+                      ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

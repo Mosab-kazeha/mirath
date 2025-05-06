@@ -10,10 +10,12 @@ import 'package:mirath_merge/BookChapters/colorss.dart';
 class PdfViewerScreen extends StatelessWidget {
   final String pdfPath;
   bool isPdfFile;
+  final String title;
 
   PdfViewerScreen({
     super.key,
     this.isPdfFile = false,
+    this.title = "عرض الكتاب",
     required this.pdfPath,
   });
 
@@ -23,9 +25,9 @@ class PdfViewerScreen extends StatelessWidget {
       textDirection: TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "عرض الكتاب",
-            style: TextStyle(color: AppColors1.color1),
+          title: Text(
+            title,
+            style: const TextStyle(color: AppColors1.color1),
           ),
           centerTitle: true,
           backgroundColor: AppColors1.color2,

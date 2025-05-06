@@ -1,3 +1,4 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:mirath_merge/BookChapters/BookChaptersScreen.dart';
 import 'package:mirath_merge/features/quizes/screens/rating_screen.dart';
@@ -16,154 +17,169 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
+    final mirathStorage = box!.getAt(0)!;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(profileBackgrounImage),
-            fit: BoxFit.cover,
+      body: DoubleBackToCloseApp(
+        snackBar: const SnackBar(
+          backgroundColor: darkBrown,
+          content: Text(
+            'إضغط مرة ثانية للخروج من التطبيق',
+            style: TextStyle(
+              color: darkerBrown,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         child: Container(
           width: size.width,
           height: size.height,
-          color: const Color.fromARGB(171, 49, 32, 18),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(
-                height: size.height / 8,
-              ),
-              const CircleAvatar(
-                radius: 60,
-                backgroundColor: light,
-                child: Icon(
-                  Icons.person,
-                  color: darkBrown,
-                  size: 60,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(profileBackgroundImage),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Container(
+            width: size.width,
+            height: size.height,
+            color: const Color.fromARGB(171, 49, 32, 18),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: size.height / 8,
                 ),
-              ),
-              Text(
-                // getIt.get<SharedPreferences>().getString("name")!,
-                box!.getAt(0)!.userName!,
-                style: const TextStyle(
-                  color: light,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
-                  fontFamily: 'Almarai',
+                const CircleAvatar(
+                  radius: 60,
+                  backgroundColor: light,
+                  child: Icon(
+                    Icons.person,
+                    color: darkBrown,
+                    size: 60,
+                  ),
                 ),
-              ),
-              // const Text(
-              //   "طالب جامعي في الهندسة المعلوماتية جامعة دمشق",
-              //   textAlign: TextAlign.center,
-              //   style: TextStyle(
-              //     color: light,
-              //     fontWeight: FontWeight.bold,
-              //     fontSize: 18,
-              //     fontFamily: 'Almarai',
-              //   ),
-              // ),
-              SizedBox(
-                height: size.height / 8,
-              ),
-              Container(
-                width: size.width,
-                height: size.height / 2.2,
-                decoration: const BoxDecoration(
-                  color: lightBrown,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
+                Text(
+                  // getIt.get<SharedPreferences>().getString("name")!,
+                  mirathStorage.userName!,
+                  style: const TextStyle(
+                    color: light,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
+                    fontFamily: 'Almarai',
+                  ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 40),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const RatingScreen(),
+                // const Text(
+                //   "طالب جامعي في الهندسة المعلوماتية جامعة دمشق",
+                //   textAlign: TextAlign.center,
+                //   style: TextStyle(
+                //     color: light,
+                //     fontWeight: FontWeight.bold,
+                //     fontSize: 18,
+                //     fontFamily: 'Almarai',
+                //   ),
+                // ),
+                SizedBox(
+                  height: size.height / 8,
+                ),
+                Container(
+                  width: size.width,
+                  height: size.height / 2.2,
+                  decoration: const BoxDecoration(
+                    color: lightBrown,
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(50)),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const RatingScreen(),
+                                  ),
+                                );
+                              },
+                              child: MyContainer(
+                                widget: const Icon(
+                                  Icons.data_saver_off_outlined,
+                                  color: oflight,
                                 ),
-                              );
-                            },
-                            child: MyContainer(
-                              widget: const Icon(
-                                Icons.data_saver_off_outlined,
-                                color: oflight,
+                                width: size.width / 2.5,
+                                height: size.height / 6,
+                                isSquare: true,
+                                title: "تقييماتي",
                               ),
-                              width: size.width / 2.5,
-                              height: size.height / 6,
-                              isSquare: true,
-                              title: "تقييماتي",
                             ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ResultScreen(),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const ResultScreen(),
+                                  ),
+                                );
+                              },
+                              child: MyContainer(
+                                widget: const Icon(
+                                  Icons.data_exploration_outlined,
+                                  color: oflight,
                                 ),
-                              );
-                            },
-                            child: MyContainer(
-                              widget: const Icon(
-                                Icons.data_exploration_outlined,
-                                color: oflight,
+                                width: size.width / 2.5,
+                                height: size.height / 6,
+                                isSquare: true,
+                                title: "مستوى التقدم",
                               ),
-                              width: size.width / 2.5,
-                              height: size.height / 6,
-                              isSquare: true,
-                              title: "مستوى التقدم",
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // MyContainer(
-                    //   widget: const Icon(
-                    //     Icons.edit_square,
-                    //     color: oflight,
-                    //   ),
-                    //   width: size.width / 1.5,
-                    //   height: size.height / 14,
-                    //   isSquare: false,
-                    //   title: "تعديل إسم المستخدم",
-                    // ),
-                    // SizedBox(
-                    //   height: size.height / 32,
-                    // ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const BookChaptersScreen(),
-                          ),
-                        );
-                      },
-                      child: MyContainer(
-                        width: size.width / 1.5,
-                        height: size.height / 14,
-                        isSquare: false,
-                        title: "العودة الى الأبواب",
-                        widget: const Icon(
-                          Icons.book,
-                          color: oflight,
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                      // MyContainer(
+                      //   widget: const Icon(
+                      //     Icons.edit_square,
+                      //     color: oflight,
+                      //   ),
+                      //   width: size.width / 1.5,
+                      //   height: size.height / 14,
+                      //   isSquare: false,
+                      //   title: "تعديل إسم المستخدم",
+                      // ),
+                      // SizedBox(
+                      //   height: size.height / 32,
+                      // ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const BookChaptersScreen(),
+                            ),
+                          );
+                        },
+                        child: MyContainer(
+                          width: size.width / 1.5,
+                          height: size.height / 14,
+                          isSquare: false,
+                          title: "العودة الى الأبواب",
+                          widget: const Icon(
+                            Icons.book,
+                            color: oflight,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

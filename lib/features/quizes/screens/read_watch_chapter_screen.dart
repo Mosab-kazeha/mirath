@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -42,86 +43,98 @@ class ReadOrWatchChapterScreen extends StatelessWidget {
         ),
         endDrawer: showCustomDrawer(
             textstyle: textstyle, size: size, context: context),
-        body: Container(
-          width: size.width,
-          height: size.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(quizBackgroundImage),
-              fit: BoxFit.cover,
+        body:  DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            backgroundColor: darkBrown,
+            content: Text(
+              'إضغط مرة ثانية للخروج من التطبيق',
+              style: TextStyle(
+                color: darkerBrown,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          child: Column(
-            children: [
-              Text(
-                bookChapterModel.title,
-                style: TextStyle(
-                  fontSize: size.width / 18,
-                  fontWeight: FontWeight.bold,
-                  color: darkBrown,
-                ),
+          child: Container(
+            width: size.width,
+            height: size.height,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(quizBackgroundImage),
+                fit: BoxFit.cover,
               ),
-              SizedBox(height: size.height / 16),
-              WatchOrReadContaner(
-                size: size,
-                color: darkerBrown,
-                title: 'مشاهدة الشرح',
-                icon: Icons.video_camera_back_rounded,
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ExplainScreen(
-                        isVideoPlayed: false,
-                        bookChapterModel: bookChapterModel,
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(height: size.height / 32),
-              //! here we need to build the ReadScreen and voice file
-              WatchOrReadContaner(
-                size: size,
-                color: darkerBrown,
-                title: 'قراءة صوتية',
-                icon: Icons.volume_up_outlined,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VoiceScreen(
-                        bookChapterModel: bookChapterModel,
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(height: size.height / 16),
-
-              MyButton(
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BookChaptersScreen(),
-                    ),
-                  );
-                },
-                buttonColor: darkerBrown,
-                buttonWidth: size.width / 1.5,
-                textColor: darkerBrown,
-                buttonHeight: size.height / 16,
-                child: Text(
-                  "عودة الي الأبواب",
+            ),
+            child: Column(
+              children: [
+                Text(
+                  bookChapterModel.title,
                   style: TextStyle(
                     fontSize: size.width / 18,
                     fontWeight: FontWeight.bold,
-                    color: light,
+                    color: darkBrown,
                   ),
                 ),
-              )
-            ],
+                SizedBox(height: size.height / 16),
+                WatchOrReadContaner(
+                  size: size,
+                  color: darkerBrown,
+                  title: 'مشاهدة الشرح',
+                  icon: Icons.video_camera_back_rounded,
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExplainScreen(
+                          isVideoPlayed: false,
+                          bookChapterModel: bookChapterModel,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: size.height / 32),
+                //! here we need to build the ReadScreen and voice file
+                WatchOrReadContaner(
+                  size: size,
+                  color: darkerBrown,
+                  title: 'قراءة صوتية',
+                  icon: Icons.volume_up_outlined,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VoiceScreen(
+                          bookChapterModel: bookChapterModel,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: size.height / 16),
+          
+                MyButton(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BookChaptersScreen(),
+                      ),
+                    );
+                  },
+                  buttonColor: darkerBrown,
+                  buttonWidth: size.width / 1.5,
+                  textColor: darkerBrown,
+                  buttonHeight: size.height / 16,
+                  child: Text(
+                    "عودة الي الأبواب",
+                    style: TextStyle(
+                      fontSize: size.width / 18,
+                      fontWeight: FontWeight.bold,
+                      color: light,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

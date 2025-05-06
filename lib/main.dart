@@ -16,6 +16,8 @@ import 'features/quizes/providers/quiz_provider.dart';
 import 'features/quizes/providers/written_quiz_provider.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
+import 'features/quizes/screens/welcome_screen.dart';
+
 Box<MirathModelWithHive>? box;
 
 Future<void> main() async {
@@ -43,6 +45,7 @@ Future<void> main() async {
         levelOfProgress: 0,
         userName: null,
         numberOfCompletedChapter: 0,
+        isFirstTime: true,
       ),
     );
   }
@@ -102,6 +105,7 @@ class _MyAppState extends State<MyApp> {
         // Perform the update
         await updater.update();
       } on UpdateException catch (error) {
+        print(error);
         // Handle any errors that occur while updating.
       }
     }
@@ -126,7 +130,11 @@ class _MyAppState extends State<MyApp> {
         locale: localization.currentLocale,
         supportedLocales: localization.supportedLocales,
         localizationsDelegates: localization.localizationsDelegates,
-        home: widget.islogged ? const BookChaptersScreen() : const SignUi(),
+        home: box!.getAt(0)!.isFirstTime
+            ? const WelcomeScreen()
+            : widget.islogged
+                ? const BookChaptersScreen()
+                : const SignUi(),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:mirath_merge/features/quizes/models/hive_chapter_model.dart';
 import 'package:mirath_merge/features/quizes/screens/read_watch_chapter_screen.dart';
@@ -92,6 +93,8 @@ class BookChaptersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    
+    final mirathStorage = box!.getAt(0)!;
 
     return Directionality(
       textDirection: TextDirection.ltr,
@@ -130,104 +133,116 @@ class BookChaptersScreen extends StatelessWidget {
           ),
         ),
         endDrawer: showCustomDrawer(size: size, context: context),
-        body: Directionality(
-          textDirection: TextDirection.rtl,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: Image.asset(
-                  "images/Bitmap.png",
-                  fit: BoxFit.cover,
-                ),
+        body: DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            backgroundColor: darkBrown,
+            content: Text(
+              'إضغط مرة ثانية للخروج من التطبيق',
+              style: TextStyle(
+                color: darkerBrown,
+                fontWeight: FontWeight.bold,
               ),
-              Positioned.fill(
-                child: Container(
-                  color: Colors.white.withOpacity(0.4),
+            ),
+          ),
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Image.asset(
+                    "images/Bitmap.png",
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    SizedBox(height: size.height / 40),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: box!.getAt(0)!.chapter.length,
-                        // separatorBuilder: (context, index) =>
-                        //     const Divider(indent: 20, endIndent: 20),
-                        itemBuilder: (context, index) {
-                          // box.getAt(0)!.chapter[1].isChapterOpen
-                          final ChapterModelWithHive chapter =
-                              box!.getAt(0)!.chapter[index];
-                          // final chapter = bookChapter[index];
-                          return InkWell(
-                            onTap: () {
-                              if (chapter.isChapterOpen) {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => PdfViewerScreen(
-                                //       pdfPath: chapter.pdf,
-                                //     ),
-                                //   ),
-                                // );
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ReadOrWatchChapterScreen(
-                                      bookChapterModel: chapter,
-                                    ),
-                                  ),
-                                );
-                              }
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 15),
-                              child: Row(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: AppColors1.color1,
-                                    radius: size.width / 18,
-                                    child: Text(
-                                      "${index + 1}",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: size.width / 18,
+                Positioned.fill(
+                  child: Container(
+                    color: Colors.white.withOpacity(0.4),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      SizedBox(height: size.height / 40),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: mirathStorage.chapter.length,
+                          // separatorBuilder: (context, index) =>
+                          //     const Divider(indent: 20, endIndent: 20),
+                          itemBuilder: (context, index) {
+                            // box.getAt(0)!.chapter[1].isChapterOpen
+                            final ChapterModelWithHive chapter =
+                                mirathStorage.chapter[index];
+                            // final chapter = bookChapter[index];
+                            return InkWell(
+                              onTap: () {
+                                if (chapter.isChapterOpen) {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => PdfViewerScreen(
+                                  //       pdfPath: chapter.pdf,
+                                  //     ),
+                                  //   ),
+                                  // );
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ReadOrWatchChapterScreen(
+                                        bookChapterModel: chapter,
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(width: size.width / 20),
-                                  Expanded(
-                                    child: Text(
-                                      chapter.title,
-                                      style: TextStyle(
-                                        fontSize: size.width / 22,
-                                        color: AppColors1.color1,
-                                        fontWeight: FontWeight.bold,
+                                  );
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 15),
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundColor: AppColors1.color1,
+                                      radius: size.width / 18,
+                                      child: Text(
+                                        "${index + 1}",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: size.width / 18,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Icon(
-                                    Icons.lock,
-                                    color: AppColors1.color1,
-                                    size: !chapter.isChapterOpen
-                                        ? size.width / 16
-                                        : 0,
-                                  ),
-                                ],
+                                    SizedBox(width: size.width / 20),
+                                    Expanded(
+                                      child: Text(
+                                        chapter.title,
+                                        style: TextStyle(
+                                          fontSize: size.width / 22,
+                                          color: AppColors1.color1,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.lock,
+                                      color: AppColors1.color1,
+                                      size: !chapter.isChapterOpen
+                                          ? size.width / 16
+                                          : 0,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

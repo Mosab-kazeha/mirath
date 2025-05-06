@@ -37,5 +37,6 @@ class ChapterModelWithHive extends HiveObject {
     required this.chapterIndex,
     required this.isChapterOpen,
     required this.videoUrl,
+    required this.chapterDegree,
   });
 }

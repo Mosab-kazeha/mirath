@@ -1,3 +1,4 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mirath_merge/features/quizes/models/hive_chapter_model.dart';
@@ -55,132 +56,155 @@ class QuizScreen extends StatelessWidget {
         ),
         endDrawer: showCustomDrawer(
             textstyle: textstyle, size: size, context: context),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(quizBackgroundImage),
-              fit: BoxFit.cover,
+        body: DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            backgroundColor: darkBrown,
+            content: Text(
+              'إضغط مرة ثانية للخروج من التطبيق',
+              style: TextStyle(
+                color: darkerBrown,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: size.width * 0.05,
-              vertical: size.height * 0.01,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(quizBackgroundImage),
+                fit: BoxFit.cover,
+              ),
             ),
-            child: Column(
-              children: [
-                const MyTitle(title: "أختبر فهمي"),
-                SizedBox(height: size.height * 0.04),
-                ProgressBar(
-                  progress: quiz.progress / quiz.currentQuiz.questions.length,
-                  totalNumOfQuestions: quiz.currentQuiz.questions.length,
-                  currentQuestion: quiz.currentQuestionIndex,
-                ),
-                SizedBox(height: size.height * 0.02),
-                Container(
-                  alignment: Alignment.center,
-                  height: 120,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: light,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: darkBrown,
-                      width: 5,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: size.width * 0.05,
+                vertical: size.height * 0.01,
+              ),
+              child: Column(
+                children: [
+                  const MyTitle(title: "أختبر فهمي"),
+                  SizedBox(height: size.height * 0.04),
+                  ProgressBar(
+                    progress: quiz.progress / quiz.currentQuiz.questions.length,
+                    totalNumOfQuestions: quiz.currentQuiz.questions.length,
+                    currentQuestion: quiz.currentQuestionIndex,
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  Container(
+                    alignment: Alignment.center,
+                    height: 120,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: light,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: darkBrown,
+                        width: 5,
+                      ),
+                    ),
+                    child: Text(
+                      textDirection: TextDirection.rtl,
+                      quiz.currentQuestion.question,
+                      style: textstyle,
                     ),
                   ),
-                  child: Text(
-                    textDirection: TextDirection.rtl,
-                    quiz.currentQuestion.question,
-                    style: textstyle,
-                  ),
-                ),
-                SizedBox(height: size.height * 0.06),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: quiz.currentQuestion.options.length,
-                    itemBuilder: (ctx, i) => StatefulBuilder(
-                      builder: (context, setState) {
-                        return Option(
-                          optionColor: optionColor,
-                          lable: arabicLetter(i),
-                          text: quiz.currentQuestion.options[i].answer,
-                          isCorrect: quiz.currentQuestion.options[i].isCorrect,
-                          onTap: () async {
-                            setState(() {
-                              quiz.currentQuestion.options[i].isCorrect
-                                  ? optionColor =
-                                      const Color.fromARGB(240, 76, 175, 79)
-                                  : optionColor =
-                                      const Color.fromARGB(243, 244, 67, 54);
-                            });
-                            await Future.delayed(
-                                const Duration(milliseconds: 500));
+                  SizedBox(height: size.height * 0.06),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: quiz.currentQuestion.options.length,
+                      itemBuilder: (ctx, i) => StatefulBuilder(
+                        builder: (context, setState) {
+                          return Option(
+                            optionColor: optionColor,
+                            lable: arabicLetter(i),
+                            text: quiz.currentQuestion.options[i].answer,
+                            isCorrect:
+                                quiz.currentQuestion.options[i].isCorrect,
+                            onTap: () async {
+                              setState(() {
+                                quiz.currentQuestion.options[i].isCorrect
+                                    ? optionColor =
+                                        const Color.fromARGB(240, 76, 175, 79)
+                                    : optionColor =
+                                        const Color.fromARGB(243, 244, 67, 54);
+                              });
+                              await Future.delayed(
+                                  const Duration(milliseconds: 500));
 
-                            // if (isItTheFirstMistake = false) {
-                            //   quiz.nextQuestion();
-                            // }
-                            if (isItTheFirstMistake == true &&
-                                !quiz.currentQuestion.options[i].isCorrect) {
-                              isItTheFirstMistake = false;
+                              // if (isItTheFirstMistake = false) {
+                              //   quiz.nextQuestion();
+                              // }
+                              if (isItTheFirstMistake == true &&
+                                  !quiz.currentQuestion.options[i].isCorrect) {
+                                isItTheFirstMistake = false;
 
-                              showCustomDialog(
+                                showCustomDialog(
+                                    // ignore: use_build_context_synchronously
+                                    context,
+                                    "غير صحيح",
+                                    "حاول مرة اخرى",
+                                    icon: Icons.close_outlined);
+                              } else {
+                                quiz.nextQuestion();
+                              }
+
+                              ++answeredQuestion;
+                              if (quiz.currentQuestion.options[i].isCorrect) {
+                                ++correctAnswer;
+                              }
+
+                              if (quiz.currentQuiz.questions.length ==
+                                  answeredQuestion) {
+                                //! don't forget to reactevied to check is he pass to the next chapter
+
+                                if (correctAnswer *
+                                        100 /
+                                        quiz.currentQuiz.questions.length >=
+                                    20) {
+                                  print(
+                                      "=========================${correctAnswer * 100 / answeredQuestion}");
+
+                                  //* here i save the degree of chapter
+                                  mirathStorage
+                                          .chapter[chapter.chapterIndex - 1]
+                                          .chapterDegree =
+                                      (correctAnswer * 100 / answeredQuestion)
+                                          .toInt();
+                                  //* here i count the chpter is completed
+                                  if (mirathStorage
+                                          .chapter[chapter.chapterIndex]
+                                          .isChapterOpen ==
+                                      false) {
+                                    mirathStorage.numberOfCompletedChapter =
+                                        mirathStorage.numberOfCompletedChapter +
+                                            1;
+                                  }
+                                  //*here i open the next chapter
+                                  mirathStorage.chapter[chapter.chapterIndex]
+                                      .isChapterOpen = true;
+                                  //*here i checke the
+                                  mirathStorage.levelOfProgress = 100 *
+                                      (chapter.chapterIndex) /
+                                      mirathStorage.chapter.length;
+                                  await mirathStorage.save();
+                                }
+                                quiz.finishTheQuiz();
+                                Navigator.pushReplacement(
                                   // ignore: use_build_context_synchronously
                                   context,
-                                  "غير صحيح",
-                                  "حاول مرة اخرى",
-                                  icon: Icons.close_outlined);
-                            } else {
-                              quiz.nextQuestion();
-                            }
-
-                            ++answeredQuestion;
-                            if (quiz.currentQuestion.options[i].isCorrect) {
-                              ++correctAnswer;
-                            }
-
-                            if (quiz.currentQuiz.questions.length ==
-                                answeredQuestion) {
-                              //! don't forget to reactevied to check is he pass to the next chapter
-                              //TODO change the 20 with 60
-                              if (correctAnswer * 100 / answeredQuestion >=
-                                  20) {
-                                print(
-                                    "=========================${correctAnswer * 100 / answeredQuestion}");
-
-                                //* here i save the degree of chapter
-                                mirathStorage.chapter[chapter.chapterIndex - 1]
-                                        .chapterDegree =
-                                    (correctAnswer * 100 / answeredQuestion)
-                                        .toInt();
-                                //* here i count the chpter is completed
-                                mirathStorage.numberOfCompletedChapter++;
-                                //*here i open the next chapter
-                                mirathStorage.chapter[chapter.chapterIndex]
-                                    .isChapterOpen = true;
-                                //*here i checke the
-                                mirathStorage.levelOfProgress = 100 *
-                                    (chapter.chapterIndex) /
-                                    mirathStorage.chapter.length;
-                                await mirathStorage.save();
+                                  MaterialPageRoute(
+                                    builder: (context) => const ResultScreen(),
+                                  ),
+                                );
                               }
-                              quiz.finishTheQuiz();
-                              Navigator.pushReplacement(
-                                // ignore: use_build_context_synchronously
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ResultScreen(),
-                                ),
-                              );
-                            }
-                          },
-                        );
-                      },
+                            },
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
