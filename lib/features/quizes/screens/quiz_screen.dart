@@ -160,7 +160,7 @@ class QuizScreen extends StatelessWidget {
                                 if (correctAnswer *
                                         100 /
                                         quiz.currentQuiz.questions.length >=
-                                    20) {
+                                    60) {
                                   print(
                                       "=========================${correctAnswer * 100 / answeredQuestion}");
 
